@@ -19,6 +19,150 @@
 .msw button.on{background:var(--navy);color:#fff}
 @media (max-width:560px){body:not(.staff-only) .topbar .brand > div:not(.logo):not(.kh-mark){display:none}.lux-panel .meal .now{display:block;margin:2px 0 0}}
 .lux-panel .meal .now{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin-left:6px;opacity:.8}
+
+/* ===== KITCHEN BOARD (TV) ===== */
+.kb{--kb-new:#FF7A90;--kb-prep:#F5B75A;--kb-ready:#8C9BFF;--kb-out:#4CC9F0;--kb-done:#3DDBA8;--kb-mut:#9AA2D6;--kb-line:rgba(255,255,255,.08);
+  background:radial-gradient(120% 80% at 0% 0%,#1B2366 0%,#0E1338 55%);padding:clamp(16px,1.9vw,36px) clamp(18px,2.5vw,48px);gap:clamp(14px,1.4vw,26px)}
+.kb-top{display:flex;align-items:center;gap:clamp(14px,1.4vw,26px)}
+.kb-logo{height:clamp(46px,4.3vw,84px)!important}
+.kb-title h2{margin:0;font-size:clamp(24px,2.2vw,42px);font-weight:700;letter-spacing:-.005em}
+.kb-title .sub{color:var(--kb-mut);font-size:clamp(13px,1.05vw,20px);margin-top:4px}
+.kb-title .ar{display:inline-block}
+.kb-live{display:inline-flex;align-items:center;gap:7px;margin-left:8px;font-size:.8em;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--kb-done)}
+.kb-live:before{content:"";width:9px;height:9px;border-radius:50%;background:var(--kb-done);animation:kbp 1.6s infinite}
+@keyframes kbp{50%{opacity:.4}}
+.kb-kpis{margin-left:auto;display:flex;gap:clamp(18px,2vw,40px);margin-right:clamp(10px,1.6vw,34px)}
+.kb-kpi{text-align:center}.kb-kpi b{display:block;font-size:clamp(22px,2vw,40px);font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.kb-kpi span{color:var(--kb-mut);font-size:clamp(10px,.75vw,14px);letter-spacing:.14em;text-transform:uppercase}
+.kb-clock b{font-size:clamp(32px,3.3vw,64px)!important}.kb-clock span{font-size:clamp(12px,1vw,20px)!important}
+.kb-main{flex:1;display:grid;grid-template-columns:1fr clamp(320px,27vw,520px);gap:clamp(14px,1.4vw,28px);min-height:0}
+.kb-board{background:rgba(255,255,255,.035);border:1px solid var(--kb-line);border-radius:clamp(18px,1.4vw,28px);overflow:hidden;display:flex;flex-direction:column;min-height:0}
+.kb-row{display:grid;grid-template-columns:10% 1fr 17% 14% 19%;align-items:center;gap:12px;padding:0 clamp(16px,1.8vw,34px);flex:0 0 clamp(48px,3.9vw,74px);border-bottom:1px solid var(--kb-line);font-size:clamp(15px,1.25vw,24px)}
+.kb-row.th{flex-basis:clamp(40px,3.2vw,62px);font-size:clamp(10px,.78vw,15px);letter-spacing:.16em;text-transform:uppercase;color:var(--kb-mut);background:rgba(255,255,255,.03)}
+.kb-row:not(.th):not(.sec):nth-child(even){background:rgba(255,255,255,.018)}
+.kb-row.enter{animation:kbIn .8s cubic-bezier(.2,.8,.2,1)}
+@keyframes kbIn{from{opacity:0;transform:translateX(-24px);background:rgba(255,122,144,.18)}to{opacity:1;transform:none}}
+.kb-row.done{opacity:.62;flex-basis:calc(clamp(48px,3.9vw,74px)*.74);font-size:clamp(13px,1.05vw,20px)}
+.kb-row.sec{flex-basis:clamp(36px,2.8vw,54px);font-size:clamp(10px,.8vw,15px);letter-spacing:.16em;text-transform:uppercase;color:var(--kb-done);background:rgba(61,219,168,.06);display:flex;gap:12px}
+.kb-row.sec b{color:#fff;letter-spacing:0;font-size:1.25em}
+.kb-rm{font-size:1.5em;font-weight:700;letter-spacing:-.01em;font-variant-numeric:tabular-nums;white-space:nowrap}.kb-rm small{font-size:.6em;color:var(--kb-mut);margin-left:2px}
+.kb-dt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500}
+.kb-pill{display:inline-flex;align-items:center;gap:8px;font-size:.8em;font-weight:600;padding:.35em .8em;border-radius:99px;background:color-mix(in srgb,var(--c) 16%,transparent);color:var(--c);white-space:nowrap}
+.kb-pill:before{content:"";width:.45em;height:.45em;border-radius:50%;background:var(--c)}
+.kb-due b{font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}.kb-due span{display:block;font-size:.68em;color:var(--kb-mut);white-space:nowrap}
+.kb-due span.late{color:var(--kb-prep);font-weight:600}
+.kb-who{color:var(--kb-mut);font-size:.85em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kb-who.hot{color:var(--kb-ready);font-weight:600}.kb-who.warn{color:#F7C77A;font-weight:600}.kb-who.ok{color:var(--kb-done)}
+.kb-empty{flex:1;display:grid;place-items:center;color:#4A5085;font-size:clamp(14px,1.2vw,22px)}
+.kb-more{flex:0 0 auto;padding:10px;text-align:center;color:var(--kb-mut);font-size:clamp(12px,.9vw,17px)}
+.kb-side{display:flex;flex-direction:column;gap:clamp(12px,1.1vw,20px);min-height:0}
+.kb-panel{background:rgba(255,255,255,.035);border:1px solid var(--kb-line);border-radius:clamp(18px,1.4vw,28px);padding:clamp(14px,1.2vw,24px) clamp(16px,1.6vw,30px)}
+.kb-panel h3{margin:0 0 clamp(8px,.8vw,14px);font-size:clamp(10px,.82vw,16px);letter-spacing:.16em;text-transform:uppercase;color:#D9BE8A}
+.kb-sc{display:grid;grid-template-columns:1fr auto;gap:4px 14px;align-items:center;margin-bottom:clamp(6px,.55vw,10px);font-size:clamp(14px,1.15vw,22px)}
+.kb-sc b{font-size:1.35em;font-weight:700;color:var(--c);font-variant-numeric:tabular-nums}
+.kb-sc .tr{grid-column:1/-1;height:clamp(5px,.42vw,8px);border-radius:9px;background:rgba(255,255,255,.07);overflow:hidden}
+.kb-sc .tr i{display:block;height:100%;border-radius:9px;background:var(--c);transition:width .8s}
+.kb-rn{display:flex;align-items:center;gap:12px;padding:clamp(4px,.38vw,7px) 0;font-size:clamp(14px,1.15vw,22px)}
+.kb-rn .n{width:1.2em;color:#6A72A8;font-weight:700}
+.kb-rn .av{color:#fff;width:clamp(32px,2.4vw,46px);height:clamp(32px,2.4vw,46px);border-radius:50%;background:#2B3480;display:grid;place-items:center;font-weight:700;font-size:.72em;flex:none}
+.kb-rn.top .av{background:linear-gradient(135deg,#C9A66B,#9C7A45);color:#1E1A10}
+.kb-rn small{display:block;color:var(--kb-mut);font-size:.68em}
+.kb-rn em{margin-left:auto;font-style:normal;color:#D9BE8A;font-weight:700;font-size:1.15em;white-space:nowrap}
+.kb-lt{display:flex;justify-content:space-between;gap:10px;font-size:clamp(14px,1.15vw,22px);padding:clamp(3px,.35vw,8px) 0}
+.kb-lt b{white-space:nowrap}.kb-lt span{color:var(--kb-mut);font-size:.82em;text-align:right}
+.kb-none{color:#6A72A8;font-size:clamp(13px,1vw,18px)}
+.kb .tv-foot{gap:10px}.kb .tv-ticker{padding:8px 0;font-size:14px}
+#tvView:fullscreen .kb .tv-foot{display:none}
+@media (max-width:1100px){.kb-main{grid-template-columns:1fr}.kb-kpis{display:none}.kb-side{flex-direction:row;flex-wrap:wrap}.kb-panel{flex:1 1 260px}}
+@media (max-width:760px){.kb-row{grid-template-columns:62px 1fr 104px 84px;font-size:14px}.kb-row>:nth-child(5){display:none}.kb-title .sub{display:none}.kb .tv-foot{flex-wrap:wrap}}
+
+/* ===== DELIVERY LOCATION PICKER (tablet) ===== */
+.lp{position:fixed;inset:0;z-index:85;display:grid;grid-template-columns:310px 1fr;background:#FFFDF9;color:#12163A;animation:lpFade .45s cubic-bezier(.2,.8,.2,1)}
+.lp.hidden{display:none}
+.lp.out{animation:lpOut .55s cubic-bezier(.5,0,.75,0) forwards}
+@keyframes lpFade{from{opacity:0}to{opacity:1}}
+@keyframes lpOut{to{opacity:0;transform:scale(1.04);filter:blur(4px)}}
+.lp-side{position:relative;overflow:hidden;background:linear-gradient(170deg,#2E3A80,#212A5F 60%,#161C44);color:#fff;padding:24px 16px 18px;display:flex;flex-direction:column}
+.lp-side:before{content:"";position:absolute;width:420px;height:420px;border-radius:50%;left:-200px;bottom:-160px;background:radial-gradient(circle,rgba(217,190,138,.18),transparent 65%);animation:lpGlow 7s ease-in-out infinite alternate;pointer-events:none}
+@keyframes lpGlow{to{transform:translate(80px,-120px) scale(1.15)}}
+.lp-side .logo-plate{height:62px;margin:0 auto 10px;animation:lpDown .6s cubic-bezier(.2,.8,.2,1) both}
+.lp-side h4{font-size:12px;letter-spacing:.24em;color:#D9BE8A;text-transform:uppercase;margin:4px 12px 8px;animation:lpDown .6s .1s both}
+.lp-fl{position:relative;display:flex;flex-direction:column;gap:2px;overflow:auto;flex:1;scrollbar-width:none}
+.lp-ind{position:absolute;left:0;right:0;top:0;height:0;border-radius:16px;background:#fff;box-shadow:0 12px 28px rgba(0,0,0,.25);transition:transform .5s cubic-bezier(.3,1.35,.5,1),height .3s;opacity:0}
+.lp-ind.on{opacity:1}
+.lp-f{position:relative;z-index:1;display:flex;align-items:center;gap:14px;padding:9px 12px;border-radius:16px;text-align:left;background:none;color:#fff;transition:color .35s;animation:lpSlide .55s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i)*45ms + .15s)}
+.lp-f i{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-style:normal;font-weight:700;font-size:18px;background:rgba(255,255,255,.09);flex:none;transition:background .35s,transform .35s,color .35s}
+.lp-f>div{min-width:0}
+.lp-f b{display:block;font-size:17px;font-weight:600}
+.lp-f small{display:block;font-size:13px;opacity:.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px}
+.lp-f:hover i{transform:scale(1.06)}
+.lp-f.on{color:#212A5F}.lp-f.on i{background:linear-gradient(135deg,#C9A66B,#9C7A45);color:#1E1A10;transform:rotate(-6deg) scale(1.05)}
+@keyframes lpSlide{from{opacity:0;transform:translateX(-26px)}to{opacity:1;transform:none}}
+@keyframes lpDown{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
+.lp-main{position:relative;display:flex;flex-direction:column;min-width:0;overflow:hidden}
+.lp-x{position:absolute;right:22px;top:20px;z-index:3;width:44px;height:44px;border-radius:50%;background:#F6F0E4;color:#212A5F;font-size:18px;font-weight:700;transition:transform .3s}
+.lp-x:hover{transform:rotate(90deg)}
+.lp-hd{padding:30px 44px 8px}
+.lp-hd .k{font-size:13px;letter-spacing:.24em;color:#B08D57;font-weight:600;text-transform:uppercase}
+.lp-hd h1{font-family:var(--serif,'Cormorant Garamond',serif);font-size:54px;font-weight:600;color:#212A5F;line-height:1.05;margin:4px 0 0}
+.lp-hd .ar{font-size:21px;color:#6B7096;text-align:left}
+.lp-swap{animation:lpUp .5s cubic-bezier(.2,.8,.2,1) both}
+@keyframes lpUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.lp-body{flex:1;overflow:auto;padding:6px 44px 130px}
+.lp-area{margin-top:22px}
+.lp-area h3{display:flex;align-items:center;gap:12px;font-size:21px;color:#212A5F;margin:0 0 14px;animation:lpUp .45s both}
+.lp-area h3 .ar{font-size:17px;color:#6B7096;font-weight:500}
+.lp-area h3 em{margin-left:auto;font-style:normal;font-size:14px;color:#6B7096;font-weight:500}
+.lp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(146px,1fr));gap:14px}
+.lp-rm{position:relative;overflow:hidden;background:#fff;border:1.5px solid #EDE5D6;border-radius:22px;padding:22px 10px;text-align:center;box-shadow:0 2px 10px rgba(33,42,95,.05);transition:transform .25s,box-shadow .25s,background .3s,border-color .3s;animation:lpPop .5s cubic-bezier(.3,1.4,.5,1) both;animation-delay:calc(var(--i)*38ms + .1s)}
+.lp-rm b{display:block;font-size:31px;font-weight:700;color:#212A5F;letter-spacing:-.01em;transition:color .3s}
+.lp-rm small{color:#6B7096;font-size:13px;transition:color .3s}
+.lp-rm:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(33,42,95,.12)}
+.lp-rm:active{transform:scale(.96)}
+.lp-rm.on{background:#212A5F;border-color:#212A5F;box-shadow:0 16px 34px rgba(33,42,95,.32);animation:lpChosen .5s cubic-bezier(.3,1.5,.5,1)}
+.lp-rm.on b,.lp-rm.on small{color:#fff}
+.lp-rm.on:after{content:"✓";position:absolute;top:9px;right:9px;width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#E3C78F,#B08D57);color:#1E1A10;font-size:14px;font-weight:800;display:grid;place-items:center;animation:lpTick .45s .1s cubic-bezier(.3,1.6,.5,1) both}
+.lp-rm.desk b{font-size:21px;padding:6px 0}
+.lp-rip{position:absolute;border-radius:50%;background:rgba(217,190,138,.55);transform:scale(0);animation:lpRip .7s ease-out forwards;pointer-events:none}
+@keyframes lpPop{from{opacity:0;transform:translateY(18px) scale(.92)}to{opacity:1;transform:none}}
+@keyframes lpChosen{0%{transform:scale(.94)}55%{transform:scale(1.06)}100%{transform:scale(1)}}
+@keyframes lpTick{from{transform:scale(0) rotate(-90deg)}to{transform:none}}
+@keyframes lpRip{to{transform:scale(4);opacity:0}}
+.lp-empty{height:70%;display:grid;place-items:center;text-align:center;color:#6B7096;font-size:19px;line-height:1.65}
+.lp-empty .bld{font-size:74px;display:inline-block;animation:lpFloat 3.2s ease-in-out infinite}
+.lp-empty b{display:block;font-family:var(--serif,'Cormorant Garamond',serif);font-size:42px;color:#212A5F;font-weight:600}
+.lp-empty .hint{display:inline-flex;align-items:center;gap:10px;margin-top:10px;color:#B08D57;font-weight:600}
+.lp-empty .hint i{font-style:normal;animation:lpNudge 1.4s ease-in-out infinite}
+@keyframes lpFloat{50%{transform:translateY(-10px)}}
+@keyframes lpNudge{50%{transform:translateX(-8px)}}
+.lp-bar{position:absolute;left:0;right:0;bottom:0;background:rgba(255,253,249,.9);backdrop-filter:blur(12px);border-top:1px solid #EDE5D6;padding:18px 44px;display:flex;align-items:center;gap:20px}
+.lp-bar .w{font-size:15px;color:#6B7096}.lp-bar .w b{display:block;font-size:25px;color:#212A5F}
+.lp-bar .w.swap b{animation:lpUp .4s cubic-bezier(.2,.8,.2,1)}
+.lp-go{margin-left:auto;padding:18px 34px;border-radius:18px;font-weight:700;font-size:18px;color:#1E1A10;background:linear-gradient(110deg,#9C7A45 0%,#C9A66B 40%,#F0DDB0 50%,#C9A66B 60%,#9C7A45 100%);background-size:250% 100%;box-shadow:0 12px 26px rgba(156,122,69,.35);transition:opacity .3s,transform .3s}
+.lp-go:disabled{opacity:.35;box-shadow:none}
+.lp-go:not(:disabled){animation:lpShine 2.6s linear infinite,lpBreathe 2.6s ease-in-out infinite}
+@keyframes lpShine{from{background-position:120% 0}to{background-position:-120% 0}}
+@keyframes lpBreathe{50%{transform:scale(1.035)}}
+.lp-ok{position:absolute;inset:0;z-index:5;background:rgba(14,19,56,.5);backdrop-filter:blur(6px);display:none;place-items:center}
+.lp-ok.show{display:grid;animation:lpFade .3s}
+.lp-ok .box{background:#FFFDF9;border-radius:34px;padding:42px 46px;width:min(540px,90vw);text-align:center;box-shadow:0 34px 90px rgba(0,0,0,.35);animation:lpZoom .55s cubic-bezier(.3,1.4,.5,1)}
+@keyframes lpZoom{from{opacity:0;transform:scale(.85) translateY(20px)}to{opacity:1;transform:none}}
+.lp-ok .k{font-size:13px;letter-spacing:.24em;color:#B08D57;font-weight:600;text-transform:uppercase}
+.lp-ok h2{font-family:var(--serif,'Cormorant Garamond',serif);font-size:70px;font-weight:600;color:#212A5F;line-height:1;margin:14px 0 8px;display:flex;justify-content:center;gap:2px}
+.lp-ok h2 span{display:inline-block;animation:lpDigit .5s cubic-bezier(.3,1.5,.5,1) both;animation-delay:calc(var(--i)*70ms + .15s)}
+@keyframes lpDigit{from{opacity:0;transform:translateY(30px) rotateX(80deg)}to{opacity:1;transform:none}}
+.lp-ok p{color:#6B7096;font-size:18px;line-height:1.5;margin:0}
+.lp-ok .row{display:flex;gap:12px;margin-top:28px}
+.lp-ok .row button{flex:1;padding:18px;border-radius:18px;font-weight:700;font-size:17px}
+.lp-ok .row .b-soft{background:#F6F0E4;color:#212A5F}
+.lp-ok .row .lp-go{margin:0}
+.lp-ok.go .box{animation:lpAway .5s cubic-bezier(.5,0,.75,0) forwards}
+@keyframes lpAway{to{opacity:0;transform:scale(1.12)}}
+.loc-chip{cursor:pointer}
+.loc-chip u{text-decoration:none;margin-left:8px;padding:2px 9px;border-radius:99px;background:rgba(217,190,138,.22);color:#E9D3A6;font-size:.85em;font-weight:600}
+@media (max-width:860px){.lp{grid-template-columns:1fr;grid-template-rows:auto 1fr}.lp-side{padding:14px 12px 10px}.lp-side .logo-plate,.lp-side h4{display:none}
+  .lp-fl{flex-direction:row;overflow-x:auto;gap:6px}.lp-ind{display:none}.lp-f{flex:none;padding:6px 10px}.lp-f small{display:none}.lp-f.on{background:#fff}
+  .lp-hd{padding:20px 20px 4px}.lp-hd h1{font-size:40px}.lp-body{padding:6px 20px 130px}.lp-bar{padding:14px 20px}.lp-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))}}
 </style>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1161,7 +1305,10 @@ body.staff-only .strip{display:none}
 .uchip button:hover{background:rgba(255,255,255,.26)}
 .uchip .gold{background:linear-gradient(120deg,#9C7A45,#C9A66B);color:#1E1A10}
 body.one-view .seg{display:none}
-@media (max-width:1700px){body:not(.one-view) .uchip .nm,body:not(.one-view) .uchip button span{display:none}body:not(.one-view) .uchip{padding:4px}body:not(.one-view) .uchip button{padding:7px 9px}}
+@media (min-width:1500px){.topbar .in{max-width:1640px}}
+@media (max-width:1360px) and (min-width:761px){body:not(.staff-only) .topbar .brand > div:not(.logo):not(.kh-mark){display:none}.topbar .in{gap:14px}}
+.topbar .in:has(#uchip:not(.hidden)) .clock{display:none}
+body:not(.one-view) .uchip .nm,body:not(.one-view) .uchip button span{display:none}body:not(.one-view) .uchip{padding:4px}body:not(.one-view) .uchip button{padding:7px 9px}
 .us-act{flex-wrap:nowrap!important}.us-tbl th,.us-tbl td b,.st{white-space:nowrap}.us-tbl td{padding:11px 8px}@media (max-width:1500px){.us-tbl .hide-m{display:none}}.us-act button{white-space:nowrap}.us-tbl .who small{white-space:nowrap}
 @media (max-width:760px){.uchip .nm{display:none}.uchip button{padding:7px 9px}}
 
@@ -1243,6 +1390,20 @@ body.one-view .seg{display:none}
   <div class="lg-side"><div class="lg-card" id="lgCard"></div></div>
 </div>
 
+
+<!-- DELIVERY LOCATION (tablet) -->
+<div id="lp" class="lp hidden" role="dialog" aria-label="Choose delivery location">
+  <aside class="lp-side"><span class="logo-plate" role="img" aria-label="Kuwait Hospital"></span><h4>Floors · الطوابق</h4><div class="lp-fl" id="lpFl"></div></aside>
+  <section class="lp-main">
+    <button class="lp-x" onclick="lpClose()" aria-label="Close">✕</button>
+    <div class="lp-hd" id="lpHd"><div class="k">Meal delivery · توصيل الوجبات</div><h1>Where should we deliver?</h1><div class="ar">أين نوصل وجبتك؟</div></div>
+    <div class="lp-body" id="lpBody"><div class="lp-empty"><div><span class="bld">🏥</span><b>Choose a floor</b>Pick your floor, then your room.<br><span class="ar">اختر الطابق ثم رقم الغرفة</span><br><span class="hint"><i>←</i> Floors are on the left</span></div></div></div>
+    <div class="lp-bar"><div class="w" id="lpSel">No room selected<b>—</b></div><button class="lp-go" id="lpGo" disabled onclick="lpConfirm()">Continue →</button></div>
+    <div class="lp-ok" id="lpOk"><div class="box"><div class="k">Deliver to · التوصيل إلى</div><h2 id="lpOkN"></h2><p id="lpOkW"></p>
+      <div class="row"><button class="b-soft" onclick="lpOkClose()">Change</button><button class="lp-go" onclick="lpGo()">Continue to menu →</button></div></div></div>
+  </section>
+</div>
+
 <!-- TOP BAR -->
 <header class="topbar">
   <svg class="ecg-bg" viewBox="0 0 1400 80" preserveAspectRatio="none"><path d="M0 40h300l14-22 16 44 16-56 14 34h40l10-10 10 10h320l14-22 16 44 16-56 14 34h40l10-10 10 10h420"/></svg>
@@ -1285,7 +1446,7 @@ body.one-view .seg{display:none}
         <p class="lux-ar ar">أهلاً وسهلاً بكم، نتمنى لكم الشفاء العاجل</p>
         <p class="lux-lead">Every tray is prepared fresh by our chefs and checked against your clinical diet. Choose one dish from each course, then tell us when you would like it served.</p>
         <div class="chips">
-          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21V8l9-5 9 5v13M9 21v-6h6v6"/></svg>Suite 312 · Bed A</span>
+          <span class="chip loc-chip" onclick="lpOpen()" title="Change delivery room"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21V8l9-5 9 5v13M9 21v-6h6v6"/></svg><span id="heroLoc">Suite 312 · Bed A</span><u>Change</u></span>
           <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/></svg>Diabetic · Regular texture</span>
           <span class="chip ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg>Approved by clinical team</span>
           <span class="chip warn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M10.3 3.9 2 18a2 2 0 0 0 1.7 3h16.6a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>Allergies: none recorded</span>
@@ -1365,18 +1526,20 @@ body.one-view .seg{display:none}
 
 <!-- ===== TV DASHBOARD ===== -->
 <main id="tvView" class="hidden">
-  <div class="tv">
+  <div class="tv kb">
     <div class="tv-banner" id="tvBanner"></div>
-    <div class="tv-top">
-      <div class="tv-logo"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 4v16M4 12h16"/></svg></div>
-      <div><h2>Patient Meal Service · <span class="mealLbl">Lunch</span></h2><div class="sub"><span class="ar">خدمة وجبات المرضى</span> · Kuwait Hospital Kitchen</div></div>
-      <div class="tv-stats" id="tvStats"></div>
-      <div class="tv-clock"><b id="tvClk">--:--</b><span id="tvDte"></span></div>
+    <div class="kb-top">
+      <span class="logo-plate kb-logo" role="img" aria-label="Kuwait Hospital"></span>
+      <div class="kb-title"><h2>Kitchen Board · <span class="mealLbl">Lunch</span></h2>
+        <div class="sub">Ready trays first, then by delivery time · <span class="ar">لوحة المطبخ</span> <span class="kb-live">Live</span></div></div>
+      <div class="kb-kpis" id="tvStats"></div>
+      <div class="tv-clock kb-clock"><b id="tvClk">--:--</b><span id="tvDte"></span></div>
     </div>
-    <div class="tv-cols" id="tvCols"></div>
-    <div class="tv-run" id="tvRun"></div>
+    <div class="kb-main">
+      <div class="kb-board" id="tvCols"></div>
+      <div class="kb-side" id="tvSide"></div>
+    </div>
     <div class="tv-foot">
-      <span class="live"><i></i>LIVE</span>
       <div class="tv-ticker" id="tvTicker"></div>
       <button class="btn dk" id="autoBtn" onclick="toggleAuto()">▶ Auto demo</button>
       <button class="btn dk" onclick="simulate()">+ Orders</button>
@@ -1890,14 +2053,14 @@ function announce(o){
 function submitOrder(){
   if(chosen().length !== 5) return;
   const tot = totals(), asap = slot.type==='asap', late = slot.type==='later', due = asap ? Date.now()+30*MIN : slot.t, reason = late ? slot.reason : null;
-  const o = makeOrder({meal, patient:'Demo Patient', room:'312', bed:'A', diet:'Diabetic / Regular', items:chosen().map(x=>({cat:x.cat,n:x.n})), nut:tot, mine:true,
+  const o = makeOrder({meal, patient:'Demo Patient', room:LOC.room, bed:LOC.bed, where:LOC.where, diet:'Diabetic / Regular', items:chosen().map(x=>({cat:x.cat,n:x.n})), nut:tot, mine:true,
     due, asap, late, reason, flag: tot[1] > NUT[1][2] || tot[4] > NUT[4][2]});
   orders.unshift(o); myOrder = o.id;
   $('okNum').textContent = 'ORDER #'+o.id;
   $('okWhen').innerHTML = `${ICON.clock} ${asap ? 'Delivery as soon as possible · approx. '+fmtT(due) : late ? 'Late delivery at '+fmtT(due)+(reason?' · '+reason:'') : 'Delivery scheduled for '+fmtT(due)}`;
   $('okModal').classList.remove('hidden');
   confetti(); beep(); setTimeout(()=>beep(1175),180);
-  toast(`New meal order #${o.id} · Room 312-A`);
+  toast(`New meal order #${o.id} · ${LOC.short}`);
   slot = {type:'asap'}; slotTouched = false; resetSel(); renderSlots(); renderTracker(); renderBoard();
 }
 function renderTracker(){
@@ -1961,24 +2124,45 @@ function renderTV(){
   const prepped = orders.filter(o=>o.readyAt && o.prepAt);
   const avgPrep = prepped.length ? Math.round(prepped.reduce((a,o)=>a+(o.readyAt-o.prepAt),0)/prepped.length/MIN) : 0;
   const rated = orders.filter(o=>o.fb), avgR = rated.length ? (rated.reduce((a,o)=>a+o.fb.stars,0)/rated.length).toFixed(1) : '—';
-  $('tvStats').innerHTML = [['Orders today', orders.length], ['On time', onTime+'%'], ['Avg prep', avgPrep+' min'], ['Patient rating', avgR+(rated.length?' ★':'')]]
-    .map(s=>`<div class="tv-stat"><b>${s[1]}</b><span>${s[0]}</span></div>`).join('');
-  $('tvCols').innerHTML = COLS.map(c=>{
-    const list = sorted(c.k), shown = list.slice(0, c.k==='DELIVERED' ? 5 : 6);
-    const cards = shown.map(o=>{
-      const key = o.id+c.k, enter = tvSeen.has(key) ? '' : 'enter'; tvSeen.add(key);
-      const eta = c.k==='DELIVERED'
-        ? `<div class="eta">${fmtT(o.done)}<small>${o.done<=o.due?'On time ✓':'Late'}</small></div>`
-        : `<div class="eta"><span data-due="${o.due}" data-live="1"></span><small>${o.asap?'ASAP · ':o.late?'Late · ':''}Due ${fmtT(o.due)}</small></div>`;
-      const prog = c.k==='PREPARING' ? `<div class="tv-pb"><i data-prog="${o.prepAt}"></i></div>` : '';
-      return `<div class="tv-card ${enter}"><div class="room">${o.room}<span>${o.bed}</span></div>${eta}
-        <div class="meta"><b>#${o.id}</b> · ${o.diet}${o.late?' · <em>🌙 Late tray</em>':''}${o.flag?' · <em>Dietitian</em>':''}${c.k==='OUT'&&o.porter?' · 🚶 '+o.porter+runnerAvg(o.porter):''}<br>${o.items[0].n} · ${o.items[1].n}${prog}</div></div>`;
-    }).join('');
-    return `<div class="tv-col" style="--c:${c.c}">
-      <h3><span class="ic" style="background:${c.c}22;color:${c.c}">${ICON[c.ic]}</span><span>${c.t}<small>${c.ar}</small></span><span class="big">${list.length}</span></h3>
-      ${cards || '<div class="tv-empty">No orders</div>'}
-      ${list.length > shown.length ? `<div class="tv-more">+ ${list.length-shown.length} more</div>` : ''}</div>`;
-  }).join('');
+  $('tvStats').innerHTML = [['Today', orders.length], ['On time', onTime+'%'], ['Avg prep', avgPrep+' m'], ['Rating', avgR+(rated.length?' ★':'')]]
+    .map(s=>`<div class="kb-kpi"><b>${s[1]}</b><span>${s[0]}</span></div>`).join('');
+  const ST = {NEW:['New order','var(--kb-new)'], PREPARING:['Preparing','var(--kb-prep)'], READY:['Ready','var(--kb-ready)'], OUT:['On the way','var(--kb-out)'], DELIVERED:['Delivered','var(--kb-done)']};
+  const RANK = {READY:0, OUT:1, PREPARING:2, NEW:3};
+  const active = orders.filter(o=>o.status!=='DELIVERED').sort((a,b)=> RANK[a.status]-RANK[b.status] || a.due-b.due);
+  const now = Date.now(), ago = t => Math.max(0, Math.round((now-t)/MIN));
+  const who = o => o.status==='READY' ? ['hot','Collect now'] : o.status==='OUT' ? ['', '🚶 '+(o.porter||'Runner')]
+    : o.flag && !o.approved && o.status==='NEW' ? ['warn','Dietitian review'] : o.late ? ['warn','🌙 Late tray'+(o.reason?' · '+o.reason:'')]
+    : o.status==='PREPARING' ? ['', 'In kitchen · '+ago(o.prepAt||o.created)+' min'] : ['','—'];
+  const sub = o => o.status==='READY' ? `<span>waiting ${ago(o.readyAt||now)} min</span>` : o.status==='OUT' ? `<span>left ${ago(o.outAt||now)} min ago</span>`
+    : `<span data-due="${o.due}" data-live="1"></span>`;
+  const row = (o, extra='') => { const k = o.id+o.status, enter = tvSeen.has(k) ? '' : 'enter'; tvSeen.add(k); const w = who(o), st = ST[o.status];
+    return `<div class="kb-row ${enter} ${extra}"><span class="kb-rm">${o.room}<small>${o.bed}</small></span><span class="kb-dt">${o.diet}</span>
+      <span><span class="kb-pill" style="--c:${st[1]}">${st[0]}</span></span><span class="kb-due"><b>${fmtT(o.due)}</b>${sub(o)}</span><span class="kb-who ${w[0]}">${w[1]}</span></div>`; };
+  const doneRow = o => { const k = o.id+'D', enter = tvSeen.has(k) ? '' : 'enter'; tvSeen.add(k); const ok = o.done<=o.due;
+    return `<div class="kb-row done ${enter}"><span class="kb-rm">${o.room}<small>${o.bed}</small></span><span class="kb-dt">${o.diet}</span>
+      <span><span class="kb-pill" style="--c:var(--kb-done)">Delivered</span></span><span class="kb-due"><b>${fmtT(o.done)}</b><span>${ok?'on time ✓':'late'}</span></span><span class="kb-who ok">${o.porter?'✓ '+o.porter:'✓ Delivered'}</span></div>`; };
+  // fit rows to the board height
+  const bh = ($('tvCols').clientHeight || 820) - 4, rh = Math.max(48, Math.min(74, innerWidth*0.039)), th = Math.max(40, Math.min(62, innerWidth*0.032)),
+        sec = Math.max(36, Math.min(54, innerWidth*0.028)), dr = rh*.74, more = 40, avail = bh - th;
+  const resD = del.length ? sec + Math.min(2, del.length)*dr : 0;               // always keep room for 2 delivered rows
+  let nA = Math.min(active.length, Math.max(0, Math.floor((avail - resD) / rh)));
+  if(nA < active.length) nA = Math.max(0, Math.floor((avail - resD - more) / rh));
+  const hidden = active.length - nA;
+  const nD = del.length ? Math.max(0, Math.min(del.length, Math.floor((avail - nA*rh - (hidden?more:0) - sec) / dr))) : 0;
+  $('tvCols').innerHTML = `<div class="kb-row th"><span>Room</span><span>Diet</span><span>Status</span><span>Deliver by</span><span>Next / who</span></div>`
+    + (active.length ? active.slice(0,nA).map(o=>row(o)).join('') : '<div class="kb-empty">No active orders · لا توجد طلبات</div>')
+    + (hidden > 0 ? `<div class="kb-more">+ ${hidden} more active order${hidden>1?'s':''}</div>` : '')
+    + (del.length && nD ? `<div class="kb-row sec">Recently delivered · <b>${del.length}</b> today · <span class="ar">تم التوصيل</span></div>` + del.slice(0,nD).map(doneRow).join('') : '');
+  // side panels
+  const cnt = k => orders.filter(o=>o.status===k).length, mx = Math.max(1, ...['NEW','PREPARING','READY','OUT','DELIVERED'].map(cnt));
+  const R = runnerStats().filter(r=>r.rated).slice(0,3);
+  const lates = orders.filter(o=>o.late && o.status!=='DELIVERED').sort((a,b)=>a.due-b.due).slice(0,3);
+  $('tvSide').innerHTML = `<div class="kb-panel"><h3>Right now · <span class="ar">الآن</span></h3>
+      ${[['New orders','NEW'],['Preparing','PREPARING'],['Ready for pickup','READY'],['On the way','OUT'],['Delivered','DELIVERED']].map(([n,k])=>`<div class="kb-sc" style="--c:${ST[k][1]}"><span>${n}</span><b>${cnt(k)}</b><div class="tr"><i style="width:${cnt(k)/mx*100}%"></i></div></div>`).join('')}</div>
+    <div class="kb-panel"><h3>Tray runners · rating</h3>
+      ${R.length ? R.map((r,i)=>`<div class="kb-rn ${i===0?'top':''}"><span class="n">${i+1}</span><span class="av">${initials(r.n)}</span><div>${r.n}<small>${r.del} delivered${r.out?' · '+r.out+' on the way':''}</small></div><em>${r.avg.toFixed(1)} ★</em></div>`).join('') : '<div class="kb-none">No ratings yet today</div>'}</div>
+    <div class="kb-panel" style="flex:1"><h3>Late trays · <span class="ar">وجبات متأخرة</span></h3>
+      ${lates.length ? lates.map(o=>`<div class="kb-lt"><b>${o.room}-${o.bed} · ${fmtT(o.due)}</b><span>${o.reason||'Late tray'}</span></div>`).join('') : '<div class="kb-none">None scheduled</div>'}</div>`;
   const tk = events.length ? events.join('') : '<span>Waiting for orders…</span>';
   renderDelivery(); renderDietitian(); renderFbPanel(); renderTvRunners();
   if($('tvTicker').dataset.k !== tk){ $('tvTicker').dataset.k = tk; $('tvTicker').innerHTML = `<div>${tk}</div>`; }
@@ -2005,12 +2189,17 @@ function autoStep(){
 const ROOMS = ['204','207','215','301','305','318','322','410','414','421'];
 const DIETS = ['Regular','Diabetic / Regular','Renal / Soft','Cardiac / Low Sodium','Soft Texture'];
 const rnd = a => a[Math.floor(Math.random()*a.length)];
+function freeBed(){ // a room-bed with no tray already in progress
+  const used = new Set(orders.filter(o=>o.status!=='DELIVERED').map(o=>o.room+o.bed).concat([LOC.room+LOC.bed]));
+  const free = ROOMS.flatMap(r=>['A','B'].map(b=>[r,b])).filter(([r,b])=>!used.has(r+b));
+  const [room,bed] = free.length ? rnd(free) : [rnd(ROOMS), rnd(['A','B'])]; return {room, bed};
+}
 function fakeOrder(created){
   const items = MENU.map(c=>{const f=rnd(c.items);return {cat:c.cat,n:f.n,v:f.v}});
   const nut = items.reduce((s,x)=>s.map((v,i)=>v+x.v[i]),[0,0,0,0,0,0,0]);
   const r = Math.random(), asap = r < .35, late = r > .8;
   const due = Math.round((created + (asap ? 30 : late ? 120 + Math.floor(Math.random()*4)*30 : 30 + Math.floor(Math.random()*4)*15)*MIN)/(5*MIN))*5*MIN;
-  return makeOrder({late, reason: late ? rnd(REASONS.slice(0,4)) : null, flag: nut[1] > 60 || nut[4] > 800, patient:'Demo Patient', room:rnd(ROOMS), bed:rnd(['A','B']), diet:rnd(DIETS),
+  return makeOrder({late, reason: late ? rnd(REASONS.slice(0,4)) : null, flag: nut[1] > 60 || nut[4] > 800, patient:'Demo Patient', ...freeBed(), diet:rnd(DIETS),
     items:items.map(({cat,n})=>({cat,n})), nut, created, due, asap});
 }
 function simulate(n){
@@ -2644,6 +2833,7 @@ function switchView(v){
   document.body.classList.toggle('sv', v==='staff');
   if((v==='tv' || v==='delivery' || v==='diet') && orders.filter(o=>!o.mine).length===0){ seedDemo(); }
   if(v==='patient') setTimeout(maybeAskFb, 800);
+  if(v==='patient' && !STAFF_ONLY && !LOC_ASKED){ LOC_ASKED = true; if(LOC.id==='312') setTimeout(lpOpen, 450); }
   if(v!=='patient'){ renderBoard(); if(v==='delivery' && !sorted('READY').length && sorted('OUT').length) dvTab='out'; if(v==='kitchen' && orders.some(o=>o.status==='NEW')) beep(660); }
   scrollTo({top:0, behavior:'smooth'});
 }
@@ -2653,7 +2843,7 @@ function switchView(v){
    Outsourced kitchen staff & tray runners → username + password created by the Hospitality Manager.
    Demo only: accounts are kept in this browser (localStorage). In the live system they are kept
    in the hospital database, passwords hashed on the server (bcrypt/Argon2), never in the browser. */
-let STAFF_ONLY = false, SESSION = null, lgTab = 'ms', lgStep = 'start', lgPending = null, usLastCred = null;
+let LOC_ASKED = false, STAFF_ONLY = false, SESSION = null, lgTab = 'ms', lgStep = 'start', lgPending = null, usLastCred = null;
 const ROLES = {
   manager:   {label:'Hospitality Manager', ar:'مدير الضيافة',   src:'m365',  views:['patient','kitchen','staff','diet','delivery','tv','users']},
   dietitian: {label:'Dietitian',           ar:'أخصائي التغذية', src:'m365',  views:['diet','tv']},
@@ -2668,7 +2858,7 @@ const DEPTS = ['Main Kitchen','Diet Kitchen','Staff Café','Tray Delivery','Stor
 const M365 = [
   {name:'Hospitality Manager', email:'hospitality.manager@kuwaithospital.com.kw', eid:'KH-20011', ward:'Administration', role:'manager'},
   {name:'Clinical Dietitian',  email:'dietitian@kuwaithospital.com.kw',          eid:'KH-30422', ward:'Ward 1 · Medical', role:'dietitian'},
-  {name:'Demo Employee',       email:'demo.employee@kuwaithospital.com.kw',      eid:'KH-10234', ward:'IT Department', role:'hstaff'},
+  {name:'Mohamed Sirajudeen',  email:'msirajudeen@kuwaithospital.com.kw',        eid:'KH-10234', ward:'IT Department', role:'hstaff'},
   {name:'Staff Nurse',         email:'nurse.ward2@kuwaithospital.com.kw',        eid:'KH-41876', ward:'Ward 2 · Surgical', role:'hstaff'},
 ];
 const DEMO_PW = 'Kitchen@2026';
@@ -2868,10 +3058,82 @@ async function authInit(){
   else { renderLogin(); setTimeout(()=>$('login').classList.remove('hidden'), 1500); }
 }
 
+
+/* ===== DELIVERY LOCATION PICKER =====
+   The patient (or nurse) picks floor → clinic → room on the tablet; the room is then used for every order. */
+const LP_FLOORS = [{"id": "GF", "n": "Ground Floor", "ar": "الطابق الأرضي", "b": "G", "areas": [{"n": "Emergency Clinic", "ar": "الطوارئ", "ic": "🚑", "rooms": [{"id": "GFF-ER-1", "label": "ER 1", "n": 1}, {"id": "GFF-ER-2", "label": "ER 2", "n": 2}, {"id": "GFF-ER-3", "label": "ER 3", "n": 3}, {"id": "GFF-ER-4", "label": "ER 4", "n": 4}]}, {"n": "Radiology Clinic", "ar": "الأشعة", "ic": "🩻", "rooms": [{"id": "GFF-RD-1", "label": "RD 1", "n": 1}, {"id": "GFF-RD-2", "label": "RD 2", "n": 2}, {"id": "GFF-RD-3", "label": "RD 3", "n": 3}]}]}, {"id": "1", "n": "First Floor", "ar": "الطابق الأول", "b": "1", "areas": [{"n": "Physiotherapy", "ar": "العلاج الطبيعي", "ic": "🦵", "rooms": [{"id": "1F-PHY-1", "label": "PHY 1", "n": 1}, {"id": "1F-PHY-2", "label": "PHY 2", "n": 2}, {"id": "1F-PHY-3", "label": "PHY 3", "n": 3}]}, {"n": "OPD Clinics", "ar": "العيادات الخارجية", "ic": "🩺", "rooms": [{"id": "1F-OPD", "label": "Clinic reception", "n": "Desk", "desk": true}], "desk": true}]}, {"id": "2", "n": "Second Floor", "ar": "الطابق الثاني", "b": "2", "areas": [{"n": "IVF Clinic", "ar": "عيادة أطفال الأنابيب", "ic": "🧬", "rooms": [{"id": "2F-IVF-1", "label": "IVF 1", "n": 1}, {"id": "2F-IVF-2", "label": "IVF 2", "n": 2}, {"id": "2F-IVF-3", "label": "IVF 3", "n": 3}, {"id": "2F-IVF-4", "label": "IVF 4", "n": 4}, {"id": "2F-IVF-5", "label": "IVF 5", "n": 5}]}]}, {"id": "3", "n": "Third Floor", "ar": "الطابق الثالث", "b": "3", "areas": [{"n": "Operation Theatre", "ar": "غرف العمليات", "ic": "🏥", "rooms": [{"id": "3F-OT-1", "label": "OT 1", "n": 1}, {"id": "3F-OT-2", "label": "OT 2", "n": 2}, {"id": "3F-OT-3", "label": "OT 3", "n": 3}, {"id": "3F-OT-4", "label": "OT 4", "n": 4}, {"id": "3F-OT-5", "label": "OT 5", "n": 5}]}, {"n": "Day Surgery", "ar": "جراحة اليوم الواحد", "ic": "🛏️", "rooms": [{"id": "3F-DS-1", "label": "DS 1", "n": 1}, {"id": "3F-DS-2", "label": "DS 2", "n": 2}, {"id": "3F-DS-3", "label": "DS 3", "n": 3}]}]}, {"id": "4", "n": "Fourth Floor", "ar": "الطابق الرابع", "b": "4", "areas": [{"n": "Operation Theatre", "ar": "غرف العمليات", "ic": "🏥", "rooms": [{"id": "4F-OT-1", "label": "OT 1", "n": 1}, {"id": "4F-OT-2", "label": "OT 2", "n": 2}, {"id": "4F-OT-3", "label": "OT 3", "n": 3}, {"id": "4F-OT-4", "label": "OT 4", "n": 4}, {"id": "4F-OT-5", "label": "OT 5", "n": 5}]}]}, {"id": "6", "n": "Sixth Floor", "ar": "الطابق السادس", "b": "6", "areas": [{"n": "OPD Clinics", "ar": "العيادات الخارجية", "ic": "🩺", "rooms": [{"id": "6F-OPD", "label": "Clinic reception", "n": "Desk", "desk": true}], "desk": true}]}, {"id": "7", "n": "Seventh Floor", "ar": "الطابق السابع", "b": "7", "areas": [{"n": "Patient Rooms", "ar": "غرف المرضى", "ic": "🛏️", "rooms": [{"id": "701", "label": "701", "n": "701"}, {"id": "702", "label": "702", "n": "702"}, {"id": "703", "label": "703", "n": "703"}, {"id": "704", "label": "704", "n": "704"}, {"id": "705", "label": "705", "n": "705"}, {"id": "706", "label": "706", "n": "706"}, {"id": "707", "label": "707", "n": "707"}, {"id": "708", "label": "708", "n": "708"}, {"id": "709", "label": "709", "n": "709"}, {"id": "710", "label": "710", "n": "710"}]}]}, {"id": "8", "n": "Eighth Floor", "ar": "الطابق الثامن", "b": "8", "areas": [{"n": "Patient Rooms", "ar": "غرف المرضى", "ic": "🛏️", "rooms": [{"id": "801", "label": "801", "n": "801"}, {"id": "802", "label": "802", "n": "802"}, {"id": "803", "label": "803", "n": "803"}, {"id": "804", "label": "804", "n": "804"}, {"id": "805", "label": "805", "n": "805"}, {"id": "806", "label": "806", "n": "806"}, {"id": "807", "label": "807", "n": "807"}, {"id": "808", "label": "808", "n": "808"}, {"id": "809", "label": "809", "n": "809"}, {"id": "810", "label": "810", "n": "810"}]}]}, {"id": "9", "n": "Ninth Floor", "ar": "الطابق التاسع", "b": "9", "areas": [{"n": "Patient Rooms", "ar": "غرف المرضى", "ic": "🛏️", "rooms": [{"id": "901", "label": "901", "n": "901"}, {"id": "902", "label": "902", "n": "902"}, {"id": "903", "label": "903", "n": "903"}, {"id": "904", "label": "904", "n": "904"}, {"id": "905", "label": "905", "n": "905"}, {"id": "906", "label": "906", "n": "906"}, {"id": "907", "label": "907", "n": "907"}, {"id": "908", "label": "908", "n": "908"}, {"id": "909", "label": "909", "n": "909"}, {"id": "910", "label": "910", "n": "910"}]}]}, {"id": "10", "n": "Tenth Floor", "ar": "الطابق العاشر", "b": "10", "areas": [{"n": "Patient Rooms", "ar": "غرف المرضى", "ic": "🛏️", "rooms": [{"id": "1001", "label": "1001", "n": "1001"}, {"id": "1003", "label": "1003", "n": "1003"}, {"id": "1004", "label": "1004", "n": "1004"}, {"id": "1005", "label": "1005", "n": "1005"}, {"id": "1008", "label": "1008", "n": "1008"}]}]}];
+const LOC_DEFAULT = {id:'312', room:'312', bed:'A', short:'Room 312-A', where:'Suite 312 · Bed A'};
+let LOC = (()=>{ try{ return JSON.parse(localStorage.getItem('kh-meal-loc')) || null; }catch(e){ return null; } })() || LOC_DEFAULT;
+let lpF = null, lpA = null, lpR = null;
+const lpTag = f => f.id==='GF' ? 'GF' : f.id+'F';
+function lpMake(f, a, r){
+  const pr = /^\d+$/.test(r.label);
+  return { id:r.id, room: r.desk ? 'OPD' : pr ? r.label : r.label, bed: pr ? '' : lpTag(f),
+    short: r.desk ? `${a.n} · ${f.n}` : pr ? `Room ${r.label}` : `${r.label} · ${f.n}`,
+    where: r.desk ? `${a.n} reception · ${f.n}` : pr ? `Room ${r.label} · ${f.n}` : `${a.n} ${r.n} · ${f.n}`, floor:f.n, area:a.n };
+}
+function lpFind(id){ for(const f of LP_FLOORS) for(const a of f.areas) for(const r of a.rooms) if(r.id===id) return [f,a,r]; return null; }
+function lpBuild(){
+  if($('lpFl').dataset.ok) return;
+  $('lpFl').innerHTML = '<span class="lp-ind" id="lpInd"></span>' + LP_FLOORS.map((f,i)=>`<button class="lp-f" style="--i:${i}" data-f="${f.id}" onclick="lpPickF('${f.id}')"><i>${f.b}</i><div><b>${f.n}</b><small>${f.areas.map(a=>a.n).join(' · ')}</small></div></button>`).join('');
+  $('lpFl').dataset.ok = 1;
+}
+function lpOpen(){
+  lpBuild(); clearTimeout(lpT); const el = $('lp'); el.classList.remove('hidden','out'); $('lpOk').classList.remove('show','go');
+  const hit = LOC && LOC.id!=='312' ? lpFind(LOC.id) : null;
+  if(hit){ setTimeout(()=>{ lpPickF(hit[0].id); const ai = hit[0].areas.indexOf(hit[1]); lpPickR(ai, hit[2].id); }, 120); }
+}
+let lpT = null;
+function lpClose(){ const el = $('lp'); el.classList.add('out'); clearTimeout(lpT); lpT = setTimeout(()=>el.classList.add('hidden'), 520); }
+function lpPickF(id){
+  lpF = LP_FLOORS.find(f=>f.id===id); lpA = null; lpR = null;
+  document.querySelectorAll('.lp-f').forEach(b=>b.classList.toggle('on', b.dataset.f===id));
+  const btn = document.querySelector(`.lp-f[data-f="${id}"]`), ind = $('lpInd');
+  if(btn && ind){ ind.style.transform = `translateY(${btn.offsetTop}px)`; ind.style.height = btn.offsetHeight+'px'; ind.classList.add('on'); btn.scrollIntoView({block:'nearest', behavior:'smooth'}); }
+  $('lpHd').innerHTML = `<div class="k">Meal delivery · توصيل الوجبات</div><h1 class="lp-swap">${lpF.n}</h1><div class="ar lp-swap" style="animation-delay:.06s">${lpF.ar}</div>`;
+  let k = 0;
+  $('lpBody').innerHTML = lpF.areas.map((a,ai)=>`<section class="lp-area"><h3 style="animation-delay:${ai*90}ms">${a.ic} ${a.n} <span class="ar">${a.ar}</span><em>${a.rooms[0].desk?'Clinic reception':a.rooms.length+' rooms'}</em></h3>
+     <div class="lp-grid">${a.rooms.map(r=>`<button class="lp-rm ${r.desk?'desk':''}" style="--i:${k++}" data-r="${r.id}" onclick="lpPickR(${ai},'${r.id}',event)"><b>${r.desk?'Reception':r.n}</b><small>${r.desk?'استقبال العيادة':a.n==='Patient Rooms'?'Room · غرفة':a.n.replace(' Clinic','')}</small></button>`).join('')}</div></section>`).join('');
+  $('lpBody').scrollTop = 0; lpBar();
+}
+function lpPickR(ai, id, ev){
+  lpA = lpF.areas[ai]; lpR = lpA.rooms.find(r=>r.id===id);
+  document.querySelectorAll('.lp-rm').forEach(b=>b.classList.toggle('on', b.dataset.r===id));
+  const btn = document.querySelector(`.lp-rm[data-r="${id}"]`);
+  if(ev && btn){ const r = btn.getBoundingClientRect(), d = Math.max(r.width, r.height), sp = document.createElement('span');
+    sp.className = 'lp-rip'; sp.style.cssText = `width:${d}px;height:${d}px;left:${ev.clientX-r.left-d/2}px;top:${ev.clientY-r.top-d/2}px`; btn.appendChild(sp); setTimeout(()=>sp.remove(), 700); }
+  lpBar();
+}
+function lpBar(){
+  const w = $('lpSel'), L = lpR ? lpMake(lpF, lpA, lpR) : null;
+  w.classList.remove('swap'); void w.offsetWidth; w.classList.add('swap');
+  w.innerHTML = L ? `Deliver to<b>${L.where}</b>` : 'No room selected<b>—</b>';
+  $('lpGo').disabled = !L;
+}
+function lpConfirm(){
+  if(!lpR) return; const L = lpMake(lpF, lpA, lpR), big = lpR.desk ? 'OPD' : lpR.label;
+  $('lpOkN').innerHTML = [...big].map((c,i)=>`<span style="--i:${i}">${c===' '?'&nbsp;':c}</span>`).join('');
+  $('lpOkW').innerHTML = `${lpF.n} · ${lpA.n}<br><span class="ar">${lpF.ar} · ${lpA.ar}</span>`;
+  $('lpOk').classList.remove('go'); $('lpOk').classList.add('show');
+}
+function lpOkClose(){ $('lpOk').classList.remove('show'); }
+function lpGo(){
+  LOC = lpMake(lpF, lpA, lpR);
+  try{ localStorage.setItem('kh-meal-loc', JSON.stringify(LOC)); }catch(e){}
+  applyLoc(); $('lpOk').classList.add('go');
+  setTimeout(()=>{ lpClose(); toast(`📍 Delivering to ${LOC.where}`); }, 380);
+}
+function applyLoc(){ if($('heroLoc')) $('heroLoc').textContent = LOC.where; }
+(function(){ // a link can carry the room: kh-meal-ordering.html#room=808
+  const m = location.hash.match(/room=([^&]+)/); if(!m) return;
+  const hit = lpFind(decodeURIComponent(m[1])); if(hit){ LOC = lpMake(...hit); try{ localStorage.setItem('kh-meal-loc', JSON.stringify(LOC)); }catch(e){} }
+})();
+
 /* ===== INIT ===== */
-applyMealLabels(); renderMenu(); renderStepper(); renderSummary(); renderSlots(); renderBoard();
+applyLoc(); applyMealLabels(); renderMenu(); renderStepper(); renderSummary(); renderSlots(); renderBoard();
 tick(); cutoffTick(); setInterval(tick, 1000); setInterval(cutoffTick, 15000);
 addEventListener('resize', movePill);
+addEventListener('resize', ()=>{ if(view==='tv') renderTV(); });
 document.fonts && document.fonts.ready.then(movePill);
 const io = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
