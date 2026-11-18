@@ -165,6 +165,7 @@
   .lp-hd{padding:20px 20px 4px}.lp-hd h1{font-size:40px}.lp-body{padding:6px 20px 130px}.lp-bar{padding:14px 20px}.lp-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))}}
 
 /* login: animated food + patient order button */
+.lg-art .ecg{display:none!important}
 .lg-food{position:absolute;right:6%;top:6%;width:min(380px,40%);aspect-ratio:1;pointer-events:none;z-index:0}
 .lg-art>*:not(.lg-food){position:relative;z-index:1}
 .lgf-ring{position:absolute;inset:9%;border-radius:50%;border:1px dashed rgba(217,190,138,.35);animation:lgfSpin 80s linear infinite}
@@ -183,11 +184,11 @@
 @keyframes lgfLift{50%{transform:translateY(-6px)}}
 @keyframes lgfSteam{0%{stroke-dashoffset:46;opacity:0;transform:translateY(6px)}35%{opacity:1}100%{stroke-dashoffset:-46;opacity:0;transform:translateY(-14px)}}
 .lg-pt{width:100%;display:flex;align-items:center;gap:16px;text-align:left;padding:18px 20px;border-radius:20px;background:linear-gradient(120deg,#9C7A45,#C9A66B 55%,#E3C78F);color:#1E1A10;box-shadow:0 14px 30px rgba(156,122,69,.35);position:relative;overflow:hidden;transition:transform .25s}
-.lg-pt:hover{transform:translateY(-2px)}
-.lg-pt:after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.45) 50%,transparent 65%);background-size:250% 100%;animation:lpShine 3.2s linear infinite}
+.lg-pt:hover{filter:brightness(1.04)}
+
 .lg-pt .ic{width:52px;height:52px;border-radius:16px;background:rgba(255,255,255,.35);display:grid;place-items:center;font-size:28px;flex:none}
 .lg-pt b{display:block;font-size:18px}.lg-pt small{display:block;font-size:13px;opacity:.85;margin-top:2px}
-.lg-pt em{margin-left:auto;font-style:normal;font-size:24px;font-weight:700;animation:lpNudgeR 1.4s ease-in-out infinite}
+.lg-pt em{margin-left:auto;font-style:normal;font-size:24px;font-weight:700}
 @keyframes lpNudgeR{50%{transform:translateX(5px)}}
 .lg-or{display:flex;align-items:center;gap:12px;margin:22px 0 18px;color:var(--muted);font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
 .lg-or:before,.lg-or:after{content:"";flex:1;height:1px;background:var(--line2)}
@@ -2968,7 +2969,7 @@ function renderLogin(err=''){
   }
   const showPt = !STAFF_ONLY && !(MCFG && MCFG.tab);
   c.innerHTML = `<div class="kick">Welcome · أهلاً وسهلاً</div>${showPt?`<button class="lg-pt" onclick="startPatient()"><span class="ic">🍽️</span><span><b>Patient food order</b><small>No sign-in · choose your floor and room</small><small class="ar" style="text-align:left">طلب وجبة المريض</small></span><em>→</em></button><div class="lg-or">or staff sign-in</div>`:''}<h2>Sign in</h2><p class="sub">${STAFF_ONLY?'Staff Café · for hospital employees':MCFG&&MCFG.tab?MCFG.sub:'Choose how you sign in'}</p>
-    ${STAFF_ONLY||(MCFG&&MCFG.tab)?'':`<div class="lg-tabs"><button class="${lgTab==='ms'?'on':''}" onclick="lgTab='ms';renderLogin()">Hospital staff<small>Microsoft 365</small></button><button class="${lgTab==='local'?'on':''}" onclick="lgTab='local';renderLogin()">Kitchen &amp; delivery<small>Username &amp; password</small></button></div>`}
+    ${STAFF_ONLY||(MCFG&&MCFG.tab)?'':`<div class="lg-tabs"><button class="${lgTab==='ms'?'on':''}" onclick="lgTab='ms';setHash('hospital-staff');renderLogin()">Hospital staff<small>Microsoft 365</small></button><button class="${lgTab==='local'?'on':''}" onclick="lgTab='local';setHash('kitchen-delivery');renderLogin()">Kitchen &amp; delivery<small>Username &amp; password</small></button></div>`}
     ${lgTab==='ms' ? `<div class="lg-f">
         <button class="lg-ms" onclick="lgStep='pick';renderLogin()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Sign in with Microsoft 365</button>
         <div class="lg-note">For the Hospitality Manager, dietitians and all hospital employees, using your <b>@kuwaithospital.com.kw</b> account. No separate password for this app.</div></div>`
@@ -3104,7 +3105,8 @@ async function authInit(){
   const s = store.sget('kh-meal-session');
   if(MCFG && MCFG.open){ SESSION = {name:MCFG.title, role: MODE==='patient'?'patient':'display', src:'none', views:[MCFG.view]}; applySession(); return; }
   if(s && ROLES[s.role] && !(STAFF_ONLY && ROLES[s.role].src!=='m365') && !(MCFG && MCFG.roles && !MCFG.roles.includes(s.role))){ SESSION = s; SESSION.views = STAFF_ONLY ? ['staff'] : ROLES[s.role].views.slice(); applySession(); }
-  else { renderLogin(); setTimeout(()=>$('login').classList.remove('hidden'), 1500); }
+  else { if(!MCFG && !STAFF_ONLY && !/^(hospital-staff|kitchen-delivery)$/.test(HASH)) setHash(lgTab==='local'?'kitchen-delivery':'hospital-staff');
+    renderLogin(); setTimeout(()=>$('login').classList.remove('hidden'), 1500); }
 }
 
 
@@ -3190,7 +3192,13 @@ addEventListener('keydown', e=>{ if(e.key==='Escape'){dvClose();closeModal('scOk
 setTimeout(()=>{ $('splash').classList.add('out'); movePill(); }, 1700);
 /* Staff-only page: kh-meal-ordering.html#staff, or kh-staff-cafe.html.
    Staff see only the Staff Café menu and order form — no patient or hospital screens. */
-STAFF_ONLY = /staff/i.test(location.hash) || !!window.KH_STAFF_ONLY;
+/* One address for everyone — the part after # opens the right page:
+   #patient (no sign-in) · #patient&room=808 · #hospital-staff · #kitchen-delivery
+   #staff-cafe · #dietitian · #manager · #kitchen · #delivery · #tv */
+const HASH = location.hash.replace(/^#/,'').split('&')[0].toLowerCase();
+function setHash(h){ try{ history.replaceState(null, '', location.pathname + location.search + '#' + h); }catch(e){ location.hash = h; } }
+STAFF_ONLY = /^(staff|staff-cafe)$/.test(HASH) || !!window.KH_STAFF_ONLY;
+if(HASH==='kitchen-delivery') lgTab = 'local';
 if(STAFF_ONLY){
   document.body.classList.add('staff-only');
   document.title = 'Kuwait Hospital · Staff Café';
@@ -3199,7 +3207,7 @@ if(STAFF_ONLY){
 }
 /* One app, separate links for each user:
    patient.html · tv.html (no sign-in) · dietitian.html · manager.html (Microsoft 365) · kitchen.html · delivery.html (username) · staff-cafe.html */
-let MODE = window.KH_MODE || ((location.search.match(/[?&]app=(\w+)/)||[])[1]) || '';
+let MODE = window.KH_MODE || ((location.search.match(/[?&]app=(\w+)/)||[])[1]) || (/^room=/.test(HASH) ? 'patient' : HASH);
 const MODES = {
   patient:  {open:true, view:'patient', title:'In-Room Dining', ar:'قائمة الطعام', splash:'Preparing today\'s menu…'},
   tv:       {open:true, view:'tv', title:'Kitchen TV', ar:'شاشة المطبخ', splash:'Opening the kitchen board…'},
@@ -3217,10 +3225,11 @@ function applyModeLabels(){
 }
 if(MCFG) applyModeLabels();
 function startPatient(){ // patients order without signing in: floor → room → menu
-  MODE = 'patient'; MCFG = MODES.patient; applyModeLabels(); LOC_ASKED = false;
+  MODE = 'patient'; MCFG = MODES.patient; applyModeLabels(); LOC_ASKED = false; setHash('patient');
   SESSION = {name:MCFG.title, role:'patient', src:'none', views:['patient']};
   $('login').classList.add('hidden'); applySession();
 }
+addEventListener('hashchange', ()=>location.reload()); // typing a new #page in the address bar opens it
 authInit();
 </script>
 </body>
