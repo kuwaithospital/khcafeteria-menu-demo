@@ -13,6 +13,13 @@
 .logo-plate.lp-lg{height:150px}.logo-plate.lp-md{height:96px}
 .kh-mark-wrap{display:flex;justify-content:center;margin-bottom:18px}
 @media (max-width:760px){.topbar .logo-plate{height:44px}}
+
+/* meal switch in dietitian panel */
+.msw{display:inline-flex;gap:4px;margin-left:10px;vertical-align:middle}
+.msw button{font-size:11px;font-weight:600;padding:4px 9px;border-radius:99px;background:var(--soft);color:var(--navy)}
+.msw button.on{background:var(--navy);color:#fff}
+@media (max-width:560px){body:not(.staff-only) .topbar .brand > div:not(.logo):not(.kh-mark){display:none}.lux-panel .meal .now{display:block;margin:2px 0 0}}
+.lux-panel .meal .now{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin-left:6px;opacity:.8}
 </style>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1287,11 +1294,11 @@ body.one-view .seg{display:none}
       </div>
       <div class="lux-panel">
         <div class="sub">Today's service</div>
-        <h4>Luncheon</h4>
+        <h4 id="luxMeal">Luncheon</h4>
         <div class="meals">
-          <button class="meal" disabled><b>Breakfast</b><span>6:30 – 8:30</span></button>
-          <button class="meal active"><b>Lunch</b><span>12:00 – 2:00</span></button>
-          <button class="meal" disabled><b>Dinner</b><span>from 3:00 PM</span></button>
+          <button class="meal" data-meal="breakfast" onclick="setMeal('breakfast')"><b>Breakfast</b><span>6:30 – 8:30 AM</span></button>
+          <button class="meal active" data-meal="lunch" onclick="setMeal('lunch')"><b>Lunch</b><span>12:00 – 2:00 PM</span></button>
+          <button class="meal" data-meal="dinner" onclick="setMeal('dinner')"><b>Dinner</b><span>6:00 – 8:00 PM</span></button>
         </div>
         <div class="ring">
           <svg width="132" height="132"><circle class="bgc" cx="66" cy="66" r="56"/><circle class="fg" id="cutRing" cx="66" cy="66" r="56" stroke-dasharray="351.9" stroke-dashoffset="351.9"/></svg>
@@ -1316,7 +1323,7 @@ body.one-view .seg{display:none}
     </div>
     <aside class="card summary reveal" style="transition-delay:.2s">
       <div class="tray-eyebrow">Your selection · <span class="ar">اختياراتك</span></div>
-      <h3>Your Luncheon Tray</h3>
+      <h3 id="trayTitle">Your Luncheon Tray</h3>
       <div class="sub">One dish from each course</div>
       <ul class="plate" id="plate"></ul>
       <div class="kcal">
@@ -1344,7 +1351,7 @@ body.one-view .seg{display:none}
   <div class="kh-head">
     <div>
       <h2>Kitchen Live Orders</h2>
-      <p>Lunch service · tickets flow left to right as the team works</p>
+      <p><span class="mealLbl">Lunch</span> service · tickets flow left to right as the team works</p>
     </div>
     <div class="tools">
       <button class="btn dk" id="apBtn" onclick="toggleAutoPrint()" title="Print each new order ticket automatically">🖨 Auto-print OFF</button>
@@ -1363,7 +1370,7 @@ body.one-view .seg{display:none}
     <div class="tv-banner" id="tvBanner"></div>
     <div class="tv-top">
       <div class="tv-logo"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 4v16M4 12h16"/></svg></div>
-      <div><h2>Patient Meal Service · Lunch</h2><div class="sub"><span class="ar">خدمة وجبات المرضى</span> · Kuwait Hospital Kitchen</div></div>
+      <div><h2>Patient Meal Service · <span class="mealLbl">Lunch</span></h2><div class="sub"><span class="ar">خدمة وجبات المرضى</span> · Kuwait Hospital Kitchen</div></div>
       <div class="tv-stats" id="tvStats"></div>
       <div class="tv-clock"><b id="tvClk">--:--</b><span id="tvDte"></span></div>
     </div>
@@ -1386,7 +1393,7 @@ body.one-view .seg{display:none}
       <div class="lux-eyebrow"><i></i>Staff only · <span class="ar">للموظفين فقط</span><i></i></div>
       <h2>Staff Café <span class="ar">كافتيريا الموظفين</span></h2>
       <p>Order ahead and skip the queue. Takeaway or dine in, now or at a time that suits your shift.</p>
-      <div class="chips"><span class="chip">☕ Open 7:00 AM – 10:00 PM</span><span class="chip">📍 Ground floor, staff dining</span><span class="chip">🧾 Paid by payroll deduction</span></div>
+      <div class="chips"><span class="chip">☕ Open 7:00 AM – 10:00 PM</span><span class="chip">📍 Ground floor, staff dining</span><span class="chip">💳 Pay at pickup · cash or card</span></div>
     </div>
     <div class="sc-tabs" id="scTabs"></div>
   </section>
@@ -1415,7 +1422,7 @@ body.one-view .seg{display:none}
   </div>
   <div class="dt-grid">
     <div class="dt-side">
-      <div class="panel"><h4>Inpatients · Lunch</h4><div id="dtList"></div></div>
+      <div class="panel"><h4>Inpatients · <span class="mealLbl">Lunch</span><span class="msw" id="dtMsw"></span></h4><div id="dtList"></div></div>
       <div class="panel"><h4>Orders awaiting review <span id="rvN"></span></h4><div id="dtReview"></div></div>
     </div>
     <div class="panel bld" id="dtBuilder"></div>
@@ -1473,7 +1480,7 @@ body.one-view .seg{display:none}
     <h3>Thank you — bon appétit</h3>
     <div class="ar">تم إرسال طلبك إلى المطبخ</div>
     <div class="num" id="okNum">ORDER #1001</div><br><div class="when" id="okWhen"></div>
-    <p>Your lunch is now in the kitchen queue. You can follow its progress at the top of this screen.</p>
+    <p>Your <span class="mealLc">lunch</span> is now in the kitchen queue. You can follow its progress at the top of this screen.</p>
     <div class="row">
       <button class="b-soft" onclick="closeModal('okModal')">Done</button>
       <button class="b-navy" onclick="closeModal('okModal');switchView('kitchen')">See kitchen screen →</button>
@@ -1530,10 +1537,10 @@ body.one-view .seg{display:none}
 const HI = id => `https://images.unsplash.com/photo-${id}?w=1600&q=90&auto=format&fit=crop`;
 function imgFail(el){ if(el.dataset.alt && !el.dataset.tried){ el.dataset.tried = 1; el.src = el.dataset.alt; } else el.remove(); }
 const pic = f => `${f.e}<img src="${f.img}" data-alt="${f.alt||''}" alt="" loading="lazy" onerror="imgFail(this)">`;
-const itemByName = n => MENU.flatMap(c=>c.items).find(x=>x.n===n);
+const itemByName = n => Object.values(MENUS).flat().flatMap(c=>c.items).find(x=>x.n===n);
 const IMG = id => `https://images.unsplash.com/photo-${id}?w=600&q=75&auto=format&fit=crop`;
 // nutrients: kcal, carbs g, protein g, fat g, sodium mg, potassium mg, phosphorus mg
-const MENU = [
+const MENU_LUNCH = [
   {cat:'Protein', ar:'البروتين', items:[
     {n:'Grilled Chicken', d:'Herb-marinated chicken breast, chargrilled and finished with lemon and thyme.', da:'صدر دجاج متبّل بالأعشاب، مشوي مع الليمون والزعتر', ar:'دجاج مشوي', e:'🍗', img:HI('1532550907401-a500c9a57435'), alt:'https://images.pexels.com/photos/2418486/pexels-photo-2418486.jpeg?auto=compress&cs=tinysrgb&w=1200', tag:'High protein', v:[190,0,34,6,190,310,240]},
     {n:'Baked Fish', d:'Oven-baked white fish fillet with olive oil, garlic and fresh parsley.', da:'فيليه سمك أبيض مخبوز بزيت الزيتون والثوم والبقدونس', ar:'سمك مخبوز', e:'🐟', img:HI('1519708227418-c8fd9a32b7a2'), alt:'https://images.pexels.com/photos/5713767/pexels-photo-5713767.jpeg?auto=compress&cs=tinysrgb&w=1200', tag:'Omega-3', v:[165,0,30,5,175,360,255]},
@@ -1553,6 +1560,60 @@ const MENU = [
     {n:'Small Apple', d:'A crisp, fresh seasonal apple.', da:'تفاحة طازجة ومقرمشة من فاكهة الموسم', ar:'تفاحة صغيرة', e:'🍎', img:HI('1560806887-1e4cd0b6cbd6'), alt:'https://images.pexels.com/photos/89434/pexels-photo-89434.jpeg?auto=compress&cs=tinysrgb&w=1200', tag:'Natural', v:[80,21,0,0,1,160,15]},
     {n:'Sugar-Free Jelly', d:'Light fruit-flavoured jelly with no added sugar.', da:'جيلي خفيف بنكهة الفواكه بدون سكر مضاف', ar:'جيلي بدون سكر', e:'🍮', img:HI('1499636136210-6f4ee915583e'), alt:'https://images.pexels.com/photos/965242/pexels-photo-965242.jpeg?auto=compress&cs=tinysrgb&w=1200', tag:'Sugar-free', v:[10,2,1,0,35,15,5]} ]}
 ];
+/* Breakfast and dinner menus. Photos: Pexels (free to use). Nutrition values are sample estimates for the demo.
+   v = [kcal, carbs g, protein g, fat g, sodium mg, potassium mg, phosphorus mg] */
+const PX = id => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=1600`;
+const _bread = MENU_LUNCH[1].items[2], _jelly = MENU_LUNCH[4].items[2], _yog = MENU_LUNCH[4].items[0];
+const MENU_BREAKFAST = [
+  {cat:'Eggs', ar:'البيض', items:[
+    {n:'Vegetable Omelette', d:'Fluffy omelette with tomato, peppers and fresh herbs.', da:'أومليت خفيف مع الطماطم والفلفل والأعشاب الطازجة', ar:'أومليت بالخضار', e:'🍳', img:PX(10934498), tag:'High protein', v:[180,4,13,12,320,220,210]},
+    {n:'Boiled Eggs', d:'Two free-range eggs, soft or hard boiled as you like.', da:'بيضتان مسلوقتان، نصف سلق أو سلق كامل حسب رغبتك', ar:'بيض مسلوق', e:'🥚', img:PX(2402506), tag:'Simple', v:[140,1,12,10,140,130,180]},
+    {n:'Shakshuka', d:'Eggs gently poached in a warm tomato and pepper sauce.', da:'بيض مطهو بهدوء في صلصة الطماطم والفلفل', ar:'شكشوكة', e:'🍅', img:PX(6275165), tag:'Warm', v:[210,12,13,13,480,520,220]} ]},
+  {cat:'Traditional', ar:'أطباق تقليدية', items:[
+    {n:'Foul Medames', d:'Slow-cooked fava beans with olive oil, cumin and lemon.', da:'فول مدمس مطهو ببطء مع زيت الزيتون والكمون والليمون', ar:'فول مدمس', e:'🫘', img:PX(4963929), tag:'Plant protein', v:[190,24,11,6,330,520,180]},
+    {n:'Labneh & Olive Oil', d:'Creamy strained yogurt with olive oil, mint and olives.', da:'لبنة كريمية مع زيت الزيتون والنعناع والزيتون', ar:'لبنة بزيت الزيتون', e:'🥣', img:PX(14930619), tag:'Light', v:[150,5,6,12,260,180,120]},
+    {n:'Grilled Halloumi', d:'Golden grilled halloumi with cucumber and tomato.', da:'جبنة حلوم مشوية مع الخيار والطماطم', ar:'حلوم مشوي', e:'🧀', img:PX(8751405), tag:'Classic', v:[220,2,15,17,650,60,300]} ]},
+  {cat:'Bread & Cereal', ar:'الخبز والحبوب', items:[
+    Object.assign({}, _bread, {n:'Whole Wheat Toast', d:'Lightly toasted whole wheat bread.', da:'خبز قمح كامل محمّص قليلاً', ar:'توست قمح كامل'}),
+    {n:'Oatmeal', d:'Warm porridge oats cooked with low-fat milk.', da:'شوفان دافئ مطهو مع حليب قليل الدسم', ar:'شوفان', e:'🥣', img:PX(4725737), tag:'High fibre', v:[150,27,5,3,10,150,180]},
+    {n:'Pancakes & Honey', d:'Two soft pancakes with a drizzle of honey.', da:'قطعتا بان كيك طريتان مع العسل', ar:'بان كيك بالعسل', e:'🥞', img:PX(14263510), tag:'Sweet treat', v:[290,52,6,7,420,140,200]} ]},
+  {cat:'Fruit', ar:'الفاكهة', items:[
+    {n:'Seasonal Fruit Bowl', d:'Freshly cut seasonal fruit.', da:'فاكهة موسمية مقطعة طازجة', ar:'طبق فاكهة موسمية', e:'🍓', img:PX(8119715), tag:'Fresh', v:[70,17,1,0,2,250,20]},
+    {n:'Banana', d:'One ripe banana.', da:'موزة ناضجة', ar:'موز', e:'🍌', img:PX(4399936), tag:'Energy', v:[105,27,1,0,1,420,25]},
+    {n:'Dates', d:'Three soft dates.', da:'ثلاث حبات تمر طرية', ar:'تمر', e:'🌴', img:PX(4499224), tag:'Traditional', v:[200,54,2,0,2,480,45]} ]},
+  {cat:'Drink', ar:'المشروب', items:[
+    {n:'Tea with Milk', d:'Freshly brewed tea with a splash of milk, no sugar.', da:'شاي طازج مع قليل من الحليب، بدون سكر', ar:'شاي بالحليب', e:'🍵', img:PX(5946623), tag:'Sugar-free', v:[40,5,2,1,25,100,50]},
+    {n:'Fresh Orange Juice', d:'A glass of freshly squeezed orange juice.', da:'كوب من عصير البرتقال الطازج', ar:'عصير برتقال طازج', e:'🍊', img:PX(6412586), tag:'Vitamin C', v:[110,26,2,0,2,450,40]},
+    {n:'Low-Fat Milk', d:'A glass of chilled low-fat milk.', da:'كوب من الحليب قليل الدسم', ar:'حليب قليل الدسم', e:'🥛', img:PX(4324359), tag:'Calcium', v:[100,12,8,2,105,370,245]} ]}
+];
+const MENU_DINNER = [
+  {cat:'Main', ar:'الطبق الرئيسي', items:[
+    {n:'Grilled Salmon', d:'Salmon fillet grilled with lemon and dill.', da:'فيليه سلمون مشوي بالليمون والشبت', ar:'سلمون مشوي', e:'🐟', img:PX(676560), tag:'Omega-3', v:[230,0,25,14,90,520,300]},
+    {n:'Chicken Machboos', d:'Kuwaiti spiced chicken with fragrant rice.', da:'مجبوس دجاج كويتي مع أرز متبّل', ar:'مجبوس دجاج', e:'🍗', img:PX(17650170), tag:'Kuwaiti classic', v:[420,48,28,12,560,420,260]},
+    {n:'Lamb Kofta', d:'Grilled minced lamb kofta with herbs and tomato.', da:'كفتة لحم ضأن مشوية مع الأعشاب والطماطم', ar:'كفتة لحم', e:'🍢', img:PX(15390223), tag:'Grilled', v:[260,4,20,18,430,300,190]} ]},
+  {cat:'Side', ar:'الطبق الجانبي', items:[
+    {n:'Steamed Vegetables', d:'Broccoli and carrots, lightly steamed.', da:'بروكلي وجزر مطهوان على البخار', ar:'خضار على البخار', e:'🥦', img:PX(3872367), tag:'Low GI', v:[60,10,2,1,40,280,45]},
+    {n:'Roast Potatoes', d:'Oven-roasted potatoes with rosemary.', da:'بطاطس محمّصة في الفرن مع إكليل الجبل', ar:'بطاطس محمّصة', e:'🥔', img:PX(162763), tag:'Comfort', v:[160,26,3,5,180,520,70]},
+    {n:'Herb Couscous', d:'Fluffy couscous with parsley and lemon.', da:'كسكس خفيف مع البقدونس والليمون', ar:'كسكس بالأعشاب', e:'🍚', img:PX(21531611), tag:'Light', v:[175,36,6,1,8,90,75]} ]},
+  {cat:'Salad', ar:'السلطة', items:[
+    {n:'Tabbouleh', d:'Parsley, tomato, mint and bulgur with lemon.', da:'بقدونس وطماطم ونعناع وبرغل مع الليمون', ar:'تبولة', e:'🥗', img:PX(5191816), tag:'Fresh', v:[110,12,3,6,190,260,45]},
+    {n:'Greek Salad', d:'Tomato, cucumber, olives and a little feta.', da:'طماطم وخيار وزيتون مع قليل من جبنة الفيتا', ar:'سلطة يونانية', e:'🥒', img:PX(19295808), tag:'Mediterranean', v:[130,8,4,10,420,280,90]} ]},
+  {cat:'Soup', ar:'الشوربة', items:[
+    {n:'Chicken Broth', d:'Clear chicken broth with carrots and herbs.', da:'مرق دجاج صافٍ مع الجزر والأعشاب', ar:'شوربة دجاج', e:'🍲', img:PX(12077982), tag:'Soothing', v:[110,8,10,4,450,240,110]},
+    {n:'Tomato Soup', d:'Smooth tomato soup with fresh basil.', da:'شوربة طماطم ناعمة مع الريحان الطازج', ar:'شوربة طماطم', e:'🍅', img:PX(539451), tag:'Warm', v:[90,14,2,3,240,400,50]} ]},
+  {cat:'Dessert', ar:'الحلى', items:[
+    {n:'Fresh Fruit Salad', d:'Mixed fresh fruit, no added sugar.', da:'سلطة فواكه طازجة بدون سكر مضاف', ar:'سلطة فواكه', e:'🍇', img:PX(1546896), tag:'Natural', v:[80,20,1,0,3,230,20]},
+    {n:'Muhallabia', d:'Traditional milk pudding with pistachio.', da:'مهلبية تقليدية بالحليب مع الفستق', ar:'مهلبية', e:'🍮', img:PX(18543469), tag:'Traditional', v:[180,30,5,5,70,200,130]},
+    _jelly ]}
+];
+const MENUS = {breakfast:MENU_BREAKFAST, lunch:MENU_LUNCH, dinner:MENU_DINNER};
+const MEALS = {
+  breakfast:{label:'Breakfast', lux:'Breakfast', ar:'الفطور', win:'6:30 – 8:30 AM', tip:'Try oatmeal → whole wheat toast, or dates → seasonal fruit.'},
+  lunch:{label:'Lunch', lux:'Luncheon', ar:'الغداء', win:'12:00 – 2:00 PM', tip:'Try brown rice → bread, or apple → sugar-free jelly.'},
+  dinner:{label:'Dinner', lux:'Dinner', ar:'العشاء', win:'6:00 – 8:00 PM', tip:'Try roast potatoes → steamed vegetables, or muhallabia → sugar-free jelly.'}};
+const NOW_MEAL = (h => h < 10.5 ? 'breakfast' : h < 16 ? 'lunch' : 'dinner')(new Date().getHours() + new Date().getMinutes()/60);
+let meal = NOW_MEAL, MENU = MENUS[meal];
+
 const NUT = [ // label, unit, illustrative per-meal guide (protein is a minimum target)
   ['Calories','kcal',650],['Carbohydrates','g',60],['Protein','g',30],['Fat','g',20],
   ['Sodium','mg',800],['Potassium','mg',1200],['Phosphorus','mg',500]];
@@ -1699,6 +1760,31 @@ function setLate(v){
 function setReason(r){ slot.reason = slot.reason===r ? null : r; renderSlots(); }
 function goDelivery(){ $('cat-delivery').scrollIntoView({behavior:'smooth'}); }
 
+
+/* ===== MEAL SERVICE (breakfast · lunch · dinner) ===== */
+function applyMealLabels(){
+  const M = MEALS[meal];
+  $('luxMeal').textContent = M.lux;
+  $('trayTitle').textContent = `Your ${M.lux} Tray`;
+  document.querySelectorAll('.mealLbl').forEach(e=>e.textContent = M.label);
+  document.querySelectorAll('.mealLc').forEach(e=>e.textContent = M.label.toLowerCase());
+  document.querySelectorAll('.lux-panel .meal').forEach(b=>{
+    b.classList.toggle('active', b.dataset.meal===meal);
+    const nb = b.querySelector('b'); nb.innerHTML = MEALS[b.dataset.meal].label + (b.dataset.meal===NOW_MEAL ? '<span class="now">· now</span>' : '');
+  });
+  if($('dtMsw')) $('dtMsw').innerHTML = Object.keys(MEALS).map(k=>`<button class="${k===meal?'on':''}" onclick="setMeal('${k}')">${MEALS[k].label}</button>`).join('');
+}
+function setMeal(m){
+  if(!MEALS[m] || m===meal) return;
+  meal = m; MENU = MENUS[m]; sel = {};
+  for(const k in DRAFT) delete DRAFT[k];
+  applyMealLabels();
+  renderMenu(); renderStepper(); renderSummary(); renderDietBanner();
+  if(typeof renderDietitian==='function') renderDietitian();
+  toast(`${MEALS[m].label} menu · ${MEALS[m].win}`);
+  if(view==='patient') setTimeout(()=>$('menu').scrollIntoView({behavior:'smooth', block:'start'}), 200);
+}
+
 /* ===== MENU ===== */
 function renderStepper(){
   $('stepper').innerHTML = MENU.map((c,i)=>`<button class="${sel[c.cat]!=null?'done':''}" onclick="document.getElementById('cat-${i}').scrollIntoView({behavior:'smooth'})"><span class="n">${sel[c.cat]!=null?'✓':i+1}</span>${c.cat}</button>`).join('')
@@ -1779,7 +1865,7 @@ function renderSummary(){
     if(isMax && pct > 100) overs.push(n[0].toLowerCase());
   });
   $('alert').classList.toggle('show', overs.length > 0);
-  $('alertTxt').innerHTML = `<b>Above the diabetic meal guide for ${overs.join(' & ')}.</b> You can still send the order — it will be flagged for the dietitian to review. Try brown rice → bread, or apple → sugar-free jelly.`;
+  $('alertTxt').innerHTML = `<b>Above the diabetic meal guide for ${overs.join(' & ')}.</b> You can still send the order — it will be flagged for the dietitian to review. ${MEALS[meal].tip}`;
   const left = 5 - ch.length;
   $('submit').disabled = left > 0;
   renderMbar();
@@ -1805,7 +1891,7 @@ function announce(o){
 function submitOrder(){
   if(chosen().length !== 5) return;
   const tot = totals(), asap = slot.type==='asap', late = slot.type==='later', due = asap ? Date.now()+30*MIN : slot.t, reason = late ? slot.reason : null;
-  const o = makeOrder({patient:'Demo Patient', room:'312', bed:'A', diet:'Diabetic / Regular', items:chosen().map(x=>({cat:x.cat,n:x.n})), nut:tot, mine:true,
+  const o = makeOrder({meal, patient:'Demo Patient', room:'312', bed:'A', diet:'Diabetic / Regular', items:chosen().map(x=>({cat:x.cat,n:x.n})), nut:tot, mine:true,
     due, asap, late, reason, flag: tot[1] > NUT[1][2] || tot[4] > NUT[4][2]});
   orders.unshift(o); myOrder = o.id;
   $('okNum').textContent = 'ORDER #'+o.id;
@@ -2049,8 +2135,10 @@ const PATIENTS = [
 const PLAN = {}, DRAFT = {};
 let dtRoom = '312';
 const BEDSIDE = '312';
-const dOk  = (cat,i) => { const p = PLAN[BEDSIDE]; return !p || p.allowed[cat].includes(i); };
-const dRec = (cat,i) => { const p = PLAN[BEDSIDE]; return !!p && p.rec[cat]===i; };
+const dOk  = (cat,i) => { const p = PLAN[BEDSIDE]; if(!p) return true;
+  if(p.meal===meal) return p.allowed[cat].includes(i);
+  const c = MENU.find(x=>x.cat===cat), pt = PATIENTS.find(x=>x.room===BEDSIDE); return ruleOk(pt.diet, c.items[i]); };
+const dRec = (cat,i) => { const p = PLAN[BEDSIDE]; return !!p && p.meal===meal && p.rec[cat]===i; };
 const clone = o => JSON.parse(JSON.stringify(o));
 const SOFT_EXCLUDE = ['Whole Wheat Bread','Garden Salad','Cucumber Salad','Small Apple'];
 // Illustrative screening rules only — real limits must come from the dietetics department.
@@ -2079,11 +2167,11 @@ function applyRules(room){
   });
   return {allowed, rec, note: DRAFT[room]?.note || ''};
 }
-const draft = room => DRAFT[room] || (DRAFT[room] = PLAN[room] ? clone(PLAN[room]) : applyRules(room));
+const draft = room => DRAFT[room] || (DRAFT[room] = (PLAN[room] && PLAN[room].meal===meal) ? clone(PLAN[room]) : applyRules(room));
 function dtStatus(pt){
   const ord = orders.find(o=>o.room===pt.room && o.bed===pt.bed && o.status!=='DELIVERED');
   if(ord) return `<span class="stc st-ord">Ordered · ${STATUS_LABEL[ord.status]}</span>`;
-  if(PLAN[pt.room]) return `<span class="stc st-sent">Menu sent ${fmtT(PLAN[pt.room].at)}</span>`;
+  if(PLAN[pt.room] && PLAN[pt.room].meal===meal) return `<span class="stc st-sent">Menu sent ${fmtT(PLAN[pt.room].at)}</span>`;
   return '<span class="stc st-none">No menu yet</span>';
 }
 const STATUS_LABEL = {NEW:'received', PREPARING:'preparing', READY:'ready', OUT:'on the way', DELIVERED:'delivered'};
@@ -2144,8 +2232,8 @@ function dtValid(d){
 }
 function dtSend(){
   const d = draft(dtRoom); if(!dtValid(d)) return;
-  PLAN[dtRoom] = Object.assign(clone(d), {at:Date.now(), by:'Clinical Dietitian'});
-  log(`Dietitian sent today's menu to Room ${dtRoom}`);
+  PLAN[dtRoom] = Object.assign(clone(d), {at:Date.now(), by:'Clinical Dietitian', meal});
+  log(`Dietitian sent the ${MEALS[meal].label.toLowerCase()} menu to Room ${dtRoom}`);
   beep(1046); toast(`Menu sent to Room ${dtRoom} bedside ✓`);
   if(dtRoom===BEDSIDE){
     MENU.forEach(c=>{ if(sel[c.cat]!=null && !dOk(c.cat, sel[c.cat])) delete sel[c.cat]; });
@@ -2158,7 +2246,7 @@ function dtOrder(){
   const pt = PATIENTS.find(x=>x.room===dtRoom);
   const items = MENU.map(c=>({cat:c.cat, ...c.items[d.rec[c.cat]]}));
   const nut = items.reduce((s,x)=>s.map((n,i)=>n+x.v[i]),[0,0,0,0,0,0,0]);
-  const o = makeOrder({patient:pt.name, room:pt.room, bed:pt.bed, diet:pt.diet, items:items.map(x=>({cat:x.cat,n:x.n})), nut,
+  const o = makeOrder({meal, patient:pt.name, room:pt.room, bed:pt.bed, diet:pt.diet, items:items.map(x=>({cat:x.cat,n:x.n})), nut,
     due: Date.now()+30*MIN, asap:true, byDiet:true, approved:true, mine: pt.room===BEDSIDE});
   orders.unshift(o); if(o.mine) myOrder = o.id;
   beep(); toast(`Order #${o.id} placed for Room ${pt.room} · sent to kitchen`);
@@ -2173,15 +2261,23 @@ function renderDietBanner(){
   const p = PLAN[BEDSIDE], b = $('dietBanner'); if(!b) return;
   if(!p){ b.classList.add('hidden'); return; }
   b.classList.remove('hidden');
+  if(p.meal!==meal){
+    b.innerHTML = `<div class="db-ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3h6v3H9zM6 5h12v16H6zM9 11h6M9 15h4"/></svg></div>
+    <div><div class="db-eye">From your dietitian · <span class="ar">من أخصائي التغذية</span></div>
+    <h4>Your diet plan applies to ${MEALS[meal].label.toLowerCase()} too</h4>
+    <p>Dishes that don't suit your diet are greyed out. Your dietitian prepared your ${MEALS[p.meal].label.toLowerCase()} menu personally.</p>
+    <small>${p.by} · diet rules applied automatically</small></div>`;
+    return;
+  }
   b.innerHTML = `<div class="db-ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3h6v3H9zM6 5h12v16H6zM9 11h6M9 15h4"/></svg></div>
     <div><div class="db-eye">From your dietitian · <span class="ar">من أخصائي التغذية</span></div>
-    <h4>Today's menu has been prepared for you</h4>
+    <h4>Your ${MEALS[meal].label.toLowerCase()} menu has been prepared for you</h4>
     <p>${p.note ? '“'+p.note.replace(/</g,'&lt;')+'”' : 'Dishes marked “Dietitian’s choice” are recommended for your diet. Dishes not suitable today are greyed out.'}</p>
     <small>${p.by} · sent ${fmtT(p.at)}</small></div>
     <button class="b-gold" onclick="useDietPick()">Use dietitian’s selection</button>`;
 }
 function useDietPick(){
-  const p = PLAN[BEDSIDE]; if(!p) return;
+  const p = PLAN[BEDSIDE]; if(!p || p.meal!==meal) return;
   MENU.forEach(c=>{ sel[c.cat] = p.rec[c.cat]; });
   renderMenu(); renderStepper(); renderSummary();
   toast('Dietitian’s selection added to your tray');
@@ -2343,7 +2439,7 @@ const SC_STATUS = ['NEW','PREPARING','READY','DONE'];
 const SC_COLS = [{k:'NEW',t:'New orders',c:'#FF6B81'},{k:'PREPARING',t:'Preparing',c:'#F0B45B'},{k:'READY',t:'Ready',c:'#12A37F'},{k:'DONE',t:'Collected / served',c:'#7C8AF0'}];
 let scTab = 'order', scCat = 0, cart = {}, sOrders = [], sSeq = 5001;
 const WARDS = ['Ward 1 · Medical','Ward 2 · Surgical','Ward 3 · Maternity','Ward 4 · Paediatrics','ICU','Emergency','Operating Theatres','Outpatient Clinics','Laboratory','Pharmacy','Radiology','Administration','IT Department'];
-let scForm = {type:'takeaway', seats:2, when:'asap', pay:'Payroll deduction', note:'', name:'Demo Staff', eid:'KH-10234', ward:'IT Department'};
+let scForm = {type:'takeaway', seats:2, when:'asap', pay:'Pay at pickup', note:'', name:'Demo Staff', eid:'KH-10234', ward:'IT Department'};
 const ME = () => scForm.eid;
 
 function scSlots(){
@@ -2405,11 +2501,11 @@ function renderScCart(){
     <div class="slotgrid sc-slots">${slots.map(t=>`<button class="slot ${scForm.when===t?'on':''}" onclick="scForm.when=${t};renderScCart()">${fmtT(t)}</button>`).join('')}</div>
     <h5>Your details · <span class="ar">بياناتك</span></h5>
     <div class="sc-form">
-      ${scLocked()?`<div class="lg-note full" style="grid-column:1/-1;font-size:12px">🔒 Filled from your Microsoft 365 account · for payroll deduction</div>`:''}<label class="full">Name · الاسم<input value="${scForm.name}" ${scLocked()?'readonly':''} placeholder="Full name" oninput="scForm.name=this.value"></label>
+      ${scLocked()?`<div class="lg-note full" style="grid-column:1/-1;font-size:12px">🔒 Filled from your Microsoft 365 account · so the café knows your order</div>`:''}<label class="full">Name · الاسم<input value="${scForm.name}" ${scLocked()?'readonly':''} placeholder="Full name" oninput="scForm.name=this.value"></label>
       <label>Employee ID · الرقم الوظيفي<input value="${scForm.eid}" ${scLocked()?'readonly':''} placeholder="KH-00000" oninput="scForm.eid=this.value"></label>
       <label>Ward / Department · القسم<select ${scLocked()?'disabled':''} onchange="scForm.ward=this.value"><option value="">Select ward</option>${WARDS.map(w=>`<option ${scForm.ward===w?'selected':''}>${w}</option>`).join('')}</select></label>
     </div>
-    <div class="sc-payline">🧾 <span><b>Payroll deduction</b> · charged to your salary</span></div>
+    <div class="sc-payline">💳 <span><b>Pay at pickup</b> · cash or card at the café counter · <span class="ar">الدفع عند الاستلام</span></span></div>
     <textarea class="note" placeholder="Notes, e.g. no sugar, extra hot · ملاحظات" oninput="scForm.note=this.value">${scForm.note}</textarea>
     <div class="sc-total"><span>Total</span><b>${KWD(total)}</b></div>
     ${(()=>{ if($('scMbN')){ $('scMbN').textContent = count ? `${count} item${count>1?'s':''} · ${KWD(total)}` : 'Your basket is empty'; $('scMbT').textContent = count ? `${dine?'🍽️ Dine in':'🥡 Takeaway'} · ${scForm.when==='asap'?'as soon as possible':'at '+fmtT(scForm.when)}` : 'Add drinks or meals'; } return ''; })()}
@@ -2426,7 +2522,7 @@ function scPlace(){
     <h3>Order placed</h3><div class="ar">تم استلام طلبك</div><div class="num">ORDER ${o.code}</div><br>
     <div class="when">${o.type==='dine' ? '🍽️ Dine in · '+o.seats+' guest'+(o.seats>1?'s':'')+' · served ' : '🥡 Takeaway · ready '}${asap ? 'in about 15 min' : 'at '+fmtT(due)}</div>
     <div class="sc-pin">Collection code <b>${o.pin}</b></div>
-    <p>${KWD(o.total)} · payroll deduction. We'll tell you here when it's ready.</p>
+    <p>${KWD(o.total)} · pay at pickup (cash or card). We'll tell you here when it's ready.</p>
     <div class="row"><button class="b-soft" onclick="closeModal('scOk')">Done</button>${scTabOk('counter')?`<button class="b-navy" onclick="closeModal('scOk');scTab='counter';renderStaff()">See café counter →</button>`:''}</div>`;
   $('scOk').classList.remove('hidden'); confetti(); beep(); setTimeout(()=>beep(1175),160);
   renderStaff();
@@ -2454,7 +2550,7 @@ function scTicketHTML(o){
     Order&nbsp;&nbsp;: ${o.code}<br>Code&nbsp;&nbsp;&nbsp;: <b>${o.pin}</b><br>Name&nbsp;&nbsp;&nbsp;: ${o.name}<br>Emp ID&nbsp;: ${o.eid}<br>Ward&nbsp;&nbsp;&nbsp;: ${o.ward}<br>
     <b>${o.type==='dine' ? 'DINE IN · '+o.seats+' GUEST'+(o.seats>1?'S':'') : 'TAKEAWAY'}</b><br><b>${o.asap ? 'ASAP' : (o.type==='dine'?'Serve':'Collect')+' at '+fmtT(o.due)}</b><hr>
     ${o.items.map(l=>`${l.q} × ${l.n}`).join('<br>')}<hr>
-    TOTAL&nbsp;&nbsp;: ${KWD(o.total)}<br>Payment: Payroll deduction${o.note?'<br>Note&nbsp;&nbsp;&nbsp;: '+o.note.replace(/</g,'&lt;'):''}<hr><div class="c"><b>DEMO — SAMPLE PRICES</b></div>`;
+    TOTAL&nbsp;&nbsp;: ${KWD(o.total)}<br>Payment: PAY AT PICKUP${o.note?'<br>Note&nbsp;&nbsp;&nbsp;: '+o.note.replace(/</g,'&lt;'):''}<hr><div class="c"><b>DEMO — SAMPLE PRICES</b></div>`;
 }
 function renderScCounter(){
   const by = k => sOrders.filter(o=>o.status===k).sort((a,b)=> k==='DONE' ? b.doneAt-a.doneAt : a.due-b.due);
@@ -2472,7 +2568,7 @@ function renderScCounter(){
         <div class="sct-due">${ICON.clock}${c.k==='DONE' ? 'Done '+fmtT(o.doneAt) : `${o.asap?'ASAP · ':''}${o.type==='dine'?'Serve':'Collect'} ${fmtT(o.due)} · <span data-due="${o.due}" data-live="1"></span>`}</div>
         <ul>${o.items.map(l=>`<li><span>${l.q}×</span>${l.e} ${l.n}</li>`).join('')}</ul>
         ${o.note?`<div class="sct-note">“${o.note.replace(/</g,'&lt;')}”</div>`:''}
-        <div class="sct-foot"><span>${KWD(o.total)} · 🧾 Payroll</span>${o.printed?'<span class="pr-ok">🖨 Printed</span>':''}</div>
+        <div class="sct-foot"><span>${KWD(o.total)} · 💳 Pay at pickup</span>${o.printed?'<span class="pr-ok">🖨 Printed</span>':''}</div>
         <div class="act">${NEXT_S[o.status]?`<button class="go" onclick="scAdvance(${o.id})">${NEXT_S[o.status]}</button>`:''}<button class="pr" title="Print" onclick="scTicket(${o.id})">🖨</button></div>
       </div>`).join('') : '<div class="empty-col">No orders</div>'}</div>`}).join('')}</div>`;
 }
@@ -2484,7 +2580,7 @@ function scSimulate(n){
     const cnt = 1 + Math.floor(Math.random()*3);
     for(let j=0;j<cnt;j++){ const f = rnd(all); const ex = items.find(l=>l.n===f.n); ex ? ex.q++ : items.push({n:f.n, e:f.e, q:1, p:f.p}); }
     const asap = Math.random()<.5, due = asap ? Date.now()+15*MIN : scSlots().at(1+Math.floor(Math.random()*5));
-    scMake({name:pp[0], eid:'KH-'+(20000+Math.floor(Math.random()*9000)), ward:pp[1], type:Math.random()<.55?'takeaway':'dine', seats:1+Math.floor(Math.random()*3), asap, due, items, pay:'Payroll deduction', note:''});
+    scMake({name:pp[0], eid:'KH-'+(20000+Math.floor(Math.random()*9000)), ward:pp[1], type:Math.random()<.55?'takeaway':'dine', seats:1+Math.floor(Math.random()*3), asap, due, items, pay:'Pay at pickup', note:''});
   }
   beep(); toast(`${n} new staff café order${n>1?'s':''}`); renderStaff();
 }
@@ -2618,7 +2714,7 @@ const scLocked = () => !!SESSION && SESSION.src==='m365';
 /* --- sign-in screen --- */
 function renderLogin(err=''){
   const c = $('lgCard');
-  if(STAFF_ONLY){ lgTab = 'ms'; $('lgTitle').innerHTML = 'Staff Café,<br><em>order ahead.</em>'; $('lgTitleAr').textContent = 'كافتيريا الموظفين'; $('lgLead').textContent = 'Sign in with your hospital Microsoft 365 account. Your name, employee ID and ward fill in automatically, and your order is charged by payroll deduction.'; $('lgWho').style.display='none'; }
+  if(STAFF_ONLY){ lgTab = 'ms'; $('lgTitle').innerHTML = 'Staff Café,<br><em>order ahead.</em>'; $('lgTitleAr').textContent = 'كافتيريا الموظفين'; $('lgLead').textContent = 'Sign in with your hospital Microsoft 365 account. Your name, employee ID and ward fill in automatically, and you pay when you pick up your order.'; $('lgWho').style.display='none'; }
   if(lgStep==='pick'){
     const list = STAFF_ONLY ? M365.filter(a=>a.role==='hstaff' || a.role==='manager') : M365;
     c.innerHTML = `<div class="kick">Microsoft 365 · Single sign-on</div><h2>Choose your account</h2><p class="sub">Prototype: the real system opens the hospital's Microsoft sign-in page (with MFA). Pick a demo account below.</p>
@@ -2774,7 +2870,7 @@ async function authInit(){
 }
 
 /* ===== INIT ===== */
-renderMenu(); renderStepper(); renderSummary(); renderSlots(); renderBoard();
+applyMealLabels(); renderMenu(); renderStepper(); renderSummary(); renderSlots(); renderBoard();
 tick(); cutoffTick(); setInterval(tick, 1000); setInterval(cutoffTick, 15000);
 addEventListener('resize', movePill);
 document.fonts && document.fonts.ready.then(movePill);
