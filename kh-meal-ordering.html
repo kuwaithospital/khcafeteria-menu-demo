@@ -163,6 +163,35 @@
 @media (max-width:860px){.lp{grid-template-columns:1fr;grid-template-rows:auto 1fr}.lp-side{padding:14px 12px 10px}.lp-side .logo-plate,.lp-side h4{display:none}
   .lp-fl{flex-direction:row;overflow-x:auto;gap:6px}.lp-ind{display:none}.lp-f{flex:none;padding:6px 10px}.lp-f small{display:none}.lp-f.on{background:#fff}
   .lp-hd{padding:20px 20px 4px}.lp-hd h1{font-size:40px}.lp-body{padding:6px 20px 130px}.lp-bar{padding:14px 20px}.lp-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))}}
+
+/* login: animated food + patient order button */
+.lg-food{position:absolute;right:6%;top:6%;width:min(380px,40%);aspect-ratio:1;pointer-events:none;z-index:0}
+.lg-art>*:not(.lg-food){position:relative;z-index:1}
+.lgf-ring{position:absolute;inset:9%;border-radius:50%;border:1px dashed rgba(217,190,138,.35);animation:lgfSpin 80s linear infinite}
+.lgf-orbit{position:absolute;inset:0;animation:lgfSpin 46s linear infinite}
+.lgf-b{position:absolute;left:50%;top:50%;width:19%;aspect-ratio:1;margin:-9.5%;transform:rotate(var(--a)) translate(0,-205%) rotate(calc(-1*var(--a)))}
+.lgf-b i{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;font-style:normal;font-size:clamp(20px,2vw,34px);background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.16),rgba(255,255,255,.04));border:1px solid rgba(217,190,138,.45);box-shadow:0 10px 26px rgba(0,0,0,.25),inset 0 0 18px rgba(217,190,138,.12);animation:lgfCounter 46s linear infinite,lgfBob var(--d) ease-in-out infinite alternate}
+.lgf-cloche{position:absolute;left:24%;top:26%;width:52%;overflow:visible;animation:lgfLift 4.5s ease-in-out infinite}
+.lgf-cloche .dome{fill:rgba(217,190,138,.16);stroke:#D9BE8A;stroke-width:3}
+.lgf-cloche .plate{fill:#D9BE8A}.lgf-cloche .knob{fill:#D9BE8A}
+.lgf-cloche .shine{fill:none;stroke:rgba(255,255,255,.55);stroke-width:4;stroke-linecap:round}
+.lgf-cloche .st{fill:none;stroke:rgba(255,255,255,.6);stroke-width:3.2;stroke-linecap:round;stroke-dasharray:46;stroke-dashoffset:46;animation:lgfSteam 3s ease-in-out infinite}
+.lgf-cloche .s2{animation-delay:.6s}.lgf-cloche .s3{animation-delay:1.2s}
+@keyframes lgfSpin{to{transform:rotate(360deg)}}
+@keyframes lgfCounter{to{transform:rotate(-360deg)}}
+@keyframes lgfBob{from{translate:0 -5px}to{translate:0 6px}}
+@keyframes lgfLift{50%{transform:translateY(-6px)}}
+@keyframes lgfSteam{0%{stroke-dashoffset:46;opacity:0;transform:translateY(6px)}35%{opacity:1}100%{stroke-dashoffset:-46;opacity:0;transform:translateY(-14px)}}
+.lg-pt{width:100%;display:flex;align-items:center;gap:16px;text-align:left;padding:18px 20px;border-radius:20px;background:linear-gradient(120deg,#9C7A45,#C9A66B 55%,#E3C78F);color:#1E1A10;box-shadow:0 14px 30px rgba(156,122,69,.35);position:relative;overflow:hidden;transition:transform .25s}
+.lg-pt:hover{transform:translateY(-2px)}
+.lg-pt:after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.45) 50%,transparent 65%);background-size:250% 100%;animation:lpShine 3.2s linear infinite}
+.lg-pt .ic{width:52px;height:52px;border-radius:16px;background:rgba(255,255,255,.35);display:grid;place-items:center;font-size:28px;flex:none}
+.lg-pt b{display:block;font-size:18px}.lg-pt small{display:block;font-size:13px;opacity:.85;margin-top:2px}
+.lg-pt em{margin-left:auto;font-style:normal;font-size:24px;font-weight:700;animation:lpNudgeR 1.4s ease-in-out infinite}
+@keyframes lpNudgeR{50%{transform:translateX(5px)}}
+.lg-or{display:flex;align-items:center;gap:12px;margin:22px 0 18px;color:var(--muted);font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
+.lg-or:before,.lg-or:after{content:"";flex:1;height:1px;background:var(--line2)}
+@media (max-width:900px){#lgLead{display:none}.lg-food{width:130px;right:18px;top:18px}.lgf-orbit,.lgf-ring{display:none}.lgf-cloche{left:0;top:0;width:100%}}
 </style>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1378,6 +1407,20 @@ body:not(.one-view) .uchip .nm,body:not(.one-view) .uchip button span{display:no
 <div id="login" class="hidden">
   <div class="lg-art">
     <div class="lg-brand"><span role="img" aria-label="Kuwait Hospital · مستشفى الكويت" class="logo-plate lp-md"></span><div class="logo kh-mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 4v16M4 12h16"/></svg></div><div class="kh-mark"><b>KUWAIT HOSPITAL</b><span>مستشفى الكويت</span></div></div>
+    
+    <div class="lg-food" aria-hidden="true">
+      <div class="lgf-ring"></div>
+      <div class="lgf-orbit">
+        <span class="lgf-b" style="--a:0deg;--d:3.0s"><i>🍲</i></span><span class="lgf-b" style="--a:45deg;--d:3.7s"><i>🥗</i></span><span class="lgf-b" style="--a:90deg;--d:4.4s"><i>☕</i></span><span class="lgf-b" style="--a:135deg;--d:3.0s"><i>🥖</i></span><span class="lgf-b" style="--a:180deg;--d:3.7s"><i>🍎</i></span><span class="lgf-b" style="--a:225deg;--d:4.4s"><i>🍗</i></span><span class="lgf-b" style="--a:270deg;--d:3.0s"><i>🥛</i></span><span class="lgf-b" style="--a:315deg;--d:3.7s"><i>🍮</i></span>
+      </div>
+      <svg class="lgf-cloche" viewBox="0 0 200 170">
+        <path class="st s1" d="M78 52c-8-10 8-16 0-28"/><path class="st s2" d="M100 46c-8-10 8-16 0-30"/><path class="st s3" d="M122 52c-8-10 8-16 0-28"/>
+        <circle cx="100" cy="74" r="7" class="knob"/>
+        <path class="dome" d="M34 132a66 58 0 0 1 132 0z"/>
+        <path class="shine" d="M56 120a46 42 0 0 1 30-36"/>
+        <rect x="18" y="132" width="164" height="10" rx="5" class="plate"/>
+      </svg>
+    </div>
     <h1 id="lgTitle">Meal ordering,<br><em>served with care.</em></h1>
     <div class="ar2" id="lgTitleAr">نظام طلب الوجبات</div>
     <p id="lgLead">One secure sign-in for every team. Hospital staff use their hospital Microsoft 365 account. Outsourced kitchen and tray runner staff use a username and password issued by the Hospitality Manager.</p>
@@ -1395,7 +1438,7 @@ body:not(.one-view) .uchip .nm,body:not(.one-view) .uchip button span{display:no
 <div id="lp" class="lp hidden" role="dialog" aria-label="Choose delivery location">
   <aside class="lp-side"><span class="logo-plate" role="img" aria-label="Kuwait Hospital"></span><h4>Floors · الطوابق</h4><div class="lp-fl" id="lpFl"></div></aside>
   <section class="lp-main">
-    <button class="lp-x" onclick="lpClose()" aria-label="Close">✕</button>
+    <button class="lp-x" id="lpX" onclick="lpClose()" aria-label="Close">✕</button>
     <div class="lp-hd" id="lpHd"><div class="k">Meal delivery · توصيل الوجبات</div><h1>Where should we deliver?</h1><div class="ar">أين نوصل وجبتك؟</div></div>
     <div class="lp-body" id="lpBody"><div class="lp-empty"><div><span class="bld">🏥</span><b>Choose a floor</b>Pick your floor, then your room.<br><span class="ar">اختر الطابق ثم رقم الغرفة</span><br><span class="hint"><i>←</i> Floors are on the left</span></div></div></div>
     <div class="lp-bar"><div class="w" id="lpSel">No room selected<b>—</b></div><button class="lp-go" id="lpGo" disabled onclick="lpConfirm()">Continue →</button></div>
@@ -2833,7 +2876,7 @@ function switchView(v){
   document.body.classList.toggle('sv', v==='staff');
   if((v==='tv' || v==='delivery' || v==='diet') && orders.filter(o=>!o.mine).length===0){ seedDemo(); }
   if(v==='patient') setTimeout(maybeAskFb, 800);
-  if(v==='patient' && !STAFF_ONLY && !LOC_ASKED){ LOC_ASKED = true; if(LOC.id==='312') setTimeout(lpOpen, 450); }
+  if(v==='patient' && !STAFF_ONLY && !LOC_ASKED){ LOC_ASKED = true; if(LOC.id==='312' || (MODE==='patient' && !/room=/.test(location.hash))) setTimeout(lpOpen, 450); }
   if(v!=='patient'){ renderBoard(); if(v==='delivery' && !sorted('READY').length && sorted('OUT').length) dvTab='out'; if(v==='kitchen' && orders.some(o=>o.status==='NEW')) beep(660); }
   scrollTo({top:0, behavior:'smooth'});
 }
@@ -2851,6 +2894,8 @@ const ROLES = {
   supervisor:{label:'Kitchen supervisor',  ar:'مشرف المطبخ',    src:'local', views:['kitchen','staff','delivery','tv']},
   kitchen:   {label:'Kitchen staff',       ar:'موظف المطبخ',    src:'local', views:['kitchen','staff','tv']},
   runner:    {label:'Tray runner',         ar:'موظف التوصيل',   src:'local', views:['delivery']},
+  patient:   {label:'Patient',             ar:'مريض',           src:'none',  views:['patient']},
+  display:   {label:'TV display',          ar:'شاشة',           src:'none',  views:['tv']},
 };
 const LOCAL_ROLES = ['kitchen','supervisor','runner'];
 const DEPTS = ['Main Kitchen','Diet Kitchen','Staff Café','Tray Delivery','Stores','Cleaning & Dishwash'];
@@ -2858,7 +2903,7 @@ const DEPTS = ['Main Kitchen','Diet Kitchen','Staff Café','Tray Delivery','Stor
 const M365 = [
   {name:'Hospitality Manager', email:'hospitality.manager@kuwaithospital.com.kw', eid:'KH-20011', ward:'Administration', role:'manager'},
   {name:'Clinical Dietitian',  email:'dietitian@kuwaithospital.com.kw',          eid:'KH-30422', ward:'Ward 1 · Medical', role:'dietitian'},
-  {name:'Mohamed Sirajudeen',  email:'msirajudeen@kuwaithospital.com.kw',        eid:'KH-10234', ward:'IT Department', role:'hstaff'},
+  {name:'Demo Employee',       email:'demo.employee@kuwaithospital.com.kw',      eid:'KH-10234', ward:'IT Department', role:'hstaff'},
   {name:'Staff Nurse',         email:'nurse.ward2@kuwaithospital.com.kw',        eid:'KH-41876', ward:'Ward 2 · Surgical', role:'hstaff'},
 ];
 const DEMO_PW = 'Kitchen@2026';
@@ -2904,8 +2949,9 @@ const scLocked = () => !!SESSION && SESSION.src==='m365';
 function renderLogin(err=''){
   const c = $('lgCard');
   if(STAFF_ONLY){ lgTab = 'ms'; $('lgTitle').innerHTML = 'Staff Café,<br><em>order ahead.</em>'; $('lgTitleAr').textContent = 'كافتيريا الموظفين'; $('lgLead').textContent = 'Sign in with your hospital Microsoft 365 account. Your name, employee ID and ward fill in automatically, and you pay when you pick up your order.'; $('lgWho').style.display='none'; }
+  if(MCFG && MCFG.tab){ lgTab = MCFG.tab; $('lgTitle').innerHTML = `${MCFG.title},<br><em>please sign in.</em>`; $('lgTitleAr').textContent = MCFG.ar; $('lgLead').textContent = MCFG.lead; $('lgWho').style.display='none'; }
   if(lgStep==='pick'){
-    const list = STAFF_ONLY ? M365.filter(a=>a.role==='hstaff' || a.role==='manager') : M365;
+    const list = STAFF_ONLY ? M365.filter(a=>a.role==='hstaff' || a.role==='manager') : MCFG && MCFG.roles ? M365.filter(a=>MCFG.roles.includes(a.role)) : M365;
     c.innerHTML = `<div class="kick">Microsoft 365 · Single sign-on</div><h2>Choose your account</h2><p class="sub">Prototype: the real system opens the hospital's Microsoft sign-in page (with MFA). Pick a demo account below.</p>
       <div class="lg-acc">${list.map((a,i)=>`<button onclick="msSignIn(${M365.indexOf(a)})"><i>${ini(a.name)}</i><span><b>${a.name}</b><small>${a.eid} · ${a.ward}<br>${a.email}</small></span><em>${ROLES[a.role].label}</em></button>`).join('')}</div>
       <button class="b-soft lg-btn" style="margin-top:14px" onclick="lgStep='start';renderLogin()">← Back</button>`;
@@ -2920,8 +2966,9 @@ function renderLogin(err=''){
       <button class="b-gold lg-btn" onclick="setNewPw()">Save and continue</button></div>`;
     pwLive(); setTimeout(()=>$('np1')&&$('np1').focus(), 50); return;
   }
-  c.innerHTML = `<div class="kick">Welcome · أهلاً وسهلاً</div><h2>Sign in</h2><p class="sub">${STAFF_ONLY?'Staff Café · for hospital employees':'Choose how you sign in'}</p>
-    ${STAFF_ONLY?'':`<div class="lg-tabs"><button class="${lgTab==='ms'?'on':''}" onclick="lgTab='ms';renderLogin()">Hospital staff<small>Microsoft 365</small></button><button class="${lgTab==='local'?'on':''}" onclick="lgTab='local';renderLogin()">Kitchen &amp; delivery<small>Username &amp; password</small></button></div>`}
+  const showPt = !STAFF_ONLY && !(MCFG && MCFG.tab);
+  c.innerHTML = `<div class="kick">Welcome · أهلاً وسهلاً</div>${showPt?`<button class="lg-pt" onclick="startPatient()"><span class="ic">🍽️</span><span><b>Patient food order</b><small>No sign-in · choose your floor and room</small><small class="ar" style="text-align:left">طلب وجبة المريض</small></span><em>→</em></button><div class="lg-or">or staff sign-in</div>`:''}<h2>Sign in</h2><p class="sub">${STAFF_ONLY?'Staff Café · for hospital employees':MCFG&&MCFG.tab?MCFG.sub:'Choose how you sign in'}</p>
+    ${STAFF_ONLY||(MCFG&&MCFG.tab)?'':`<div class="lg-tabs"><button class="${lgTab==='ms'?'on':''}" onclick="lgTab='ms';renderLogin()">Hospital staff<small>Microsoft 365</small></button><button class="${lgTab==='local'?'on':''}" onclick="lgTab='local';renderLogin()">Kitchen &amp; delivery<small>Username &amp; password</small></button></div>`}
     ${lgTab==='ms' ? `<div class="lg-f">
         <button class="lg-ms" onclick="lgStep='pick';renderLogin()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Sign in with Microsoft 365</button>
         <div class="lg-note">For the Hospitality Manager, dietitians and all hospital employees, using your <b>@kuwaithospital.com.kw</b> account. No separate password for this app.</div></div>`
@@ -2931,7 +2978,7 @@ function renderLogin(err=''){
         <div class="lg-err" id="lgErr">${esc(err)}</div>
         <button class="b-gold lg-btn" onclick="localSignIn()">Sign in</button>
         <div class="lg-note">For outsourced kitchen staff and tray runners. Forgot your password? Ask the Hospitality Manager to reset it.</div></div>
-      <div class="lg-demo"><b>Demo accounts</b> · password <b>${DEMO_PW}</b><div>${[['kitchen01','Kitchen'],['kitchen.sup','Supervisor'],['runner.ahmed','Runner'],['runner.fatima','Runner']].map(d=>`<button onclick="$('lgU').value='${d[0]}';$('lgP').value='${DEMO_PW}';$('lgP').focus()">${d[0]} · ${d[1]}</button>`).join('')}</div></div>`}
+      <div class="lg-demo"><b>Demo accounts</b> · password <b>${DEMO_PW}</b><div>${[['kitchen01','Kitchen','kitchen'],['kitchen.sup','Supervisor','supervisor'],['runner.ahmed','Runner','runner'],['runner.fatima','Runner','runner']].filter(d=>!(MCFG&&MCFG.roles)||MCFG.roles.includes(d[2])).map(d=>`<button onclick="$('lgU').value='${d[0]}';$('lgP').value='${DEMO_PW}';$('lgP').focus()">${d[0]} · ${d[1]}</button>`).join('')}</div></div>`}
     <div class="lg-foot">Prototype · accounts are stored in this browser only</div>`;
   if(lgTab==='local') setTimeout(()=>$('lgU')&&$('lgU').focus(), 50);
 }
@@ -2967,6 +3014,7 @@ async function setNewPw(){
 function finishLocal(u){ u.last = Date.now(); saveUsers(); audit(u.name, 'Signed in'); startSession({name:u.name, user:u.user, role:u.role, src:'local', eid:u.sid, ward:u.dept}); }
 function startSession(sess){
   if(STAFF_ONLY && ROLES[sess.role].src!=='m365'){ return renderLoginErr('The Staff Café is for hospital employees'); }
+  if(MCFG && MCFG.roles && !MCFG.roles.includes(sess.role)){ return renderLoginErr(`This link is for the ${MCFG.title}. Please use your own link.`); }
   sess.views = STAFF_ONLY ? ['staff'] : ROLES[sess.role].views.slice();
   SESSION = sess; store.sset('kh-meal-session', sess); lgStep = 'start';
   applySession();
@@ -2980,11 +3028,11 @@ function applySession(){
   document.body.classList.toggle('one-view', segViews.length<2);
   if(s.src==='m365'){ scForm.name = s.name; scForm.eid = s.eid; scForm.ward = s.ward; }
   if(s.role==='runner'){ PORTER = s.name; if(!RUNNERS.includes(s.name)) RUNNERS.push(s.name); $('dvName').textContent = s.name; $('dvAv').textContent = ini(s.name); }
-  $('uchip').classList.remove('hidden');
+  $('uchip').classList.toggle('hidden', s.src==='none');
   $('uchip').innerHTML = `<div class="av">${ini(s.name)}</div><div class="nm"><b>${esc(s.name)}</b><small>${s.eid?esc(s.eid)+' · ':''}${esc(s.ward||r.label)}</small></div>
     ${s.views.includes('users')?`<button data-uv="users" onclick="switchView(view==='users'?'patient':'users')" title="Kitchen & delivery accounts">👥<span> Accounts</span></button>`:''}
     <button onclick="signOut()" title="Sign out"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" style="vertical-align:-2px"><path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/></svg><span> Sign out</span></button>`;
-  const first = STAFF_ONLY ? 'staff' : ({manager:'patient', dietitian:'diet', hstaff:'staff', supervisor:'kitchen', kitchen:'kitchen', runner:'delivery'})[s.role];
+  const first = STAFF_ONLY ? 'staff' : MCFG ? MCFG.view : ({manager:'patient', dietitian:'diet', hstaff:'staff', supervisor:'kitchen', kitchen:'kitchen', runner:'delivery'})[s.role];
   scTab = scTabOk('order') ? 'order' : 'counter';
   switchView(first);
   if(first==='staff') renderStaff();
@@ -3054,7 +3102,8 @@ function usCopy(){ const c = usLastCred; const t = `Kuwait Hospital · Meal Orde
 async function authInit(){
   await seedUsers();
   const s = store.sget('kh-meal-session');
-  if(s && ROLES[s.role] && !(STAFF_ONLY && ROLES[s.role].src!=='m365')){ SESSION = s; SESSION.views = STAFF_ONLY ? ['staff'] : ROLES[s.role].views.slice(); applySession(); }
+  if(MCFG && MCFG.open){ SESSION = {name:MCFG.title, role: MODE==='patient'?'patient':'display', src:'none', views:[MCFG.view]}; applySession(); return; }
+  if(s && ROLES[s.role] && !(STAFF_ONLY && ROLES[s.role].src!=='m365') && !(MCFG && MCFG.roles && !MCFG.roles.includes(s.role))){ SESSION = s; SESSION.views = STAFF_ONLY ? ['staff'] : ROLES[s.role].views.slice(); applySession(); }
   else { renderLogin(); setTimeout(()=>$('login').classList.remove('hidden'), 1500); }
 }
 
@@ -3079,7 +3128,7 @@ function lpBuild(){
   $('lpFl').dataset.ok = 1;
 }
 function lpOpen(){
-  lpBuild(); clearTimeout(lpT); const el = $('lp'); el.classList.remove('hidden','out'); $('lpOk').classList.remove('show','go');
+  lpBuild(); clearTimeout(lpT); $('lpX').style.display = (MODE==='patient' && LOC.id==='312') ? 'none' : ''; const el = $('lp'); el.classList.remove('hidden','out'); $('lpOk').classList.remove('show','go');
   const hit = LOC && LOC.id!=='312' ? lpFind(LOC.id) : null;
   if(hit){ setTimeout(()=>{ lpPickF(hit[0].id); const ai = hit[0].areas.indexOf(hit[1]); lpPickR(ai, hit[2].id); }, 120); }
 }
@@ -3147,6 +3196,30 @@ if(STAFF_ONLY){
   document.title = 'Kuwait Hospital · Staff Café';
   const bs = document.querySelectorAll('.brand > div > span'); if(bs[0]) bs[0].textContent = 'Staff Café · '; if(bs[1]) bs[1].textContent = 'كافتيريا الموظفين';
   const sp = document.querySelector('#splash p'); if(sp) sp.textContent = 'Opening the Staff Café…';
+}
+/* One app, separate links for each user:
+   patient.html · tv.html (no sign-in) · dietitian.html · manager.html (Microsoft 365) · kitchen.html · delivery.html (username) · staff-cafe.html */
+let MODE = window.KH_MODE || ((location.search.match(/[?&]app=(\w+)/)||[])[1]) || '';
+const MODES = {
+  patient:  {open:true, view:'patient', title:'In-Room Dining', ar:'قائمة الطعام', splash:'Preparing today\'s menu…'},
+  tv:       {open:true, view:'tv', title:'Kitchen TV', ar:'شاشة المطبخ', splash:'Opening the kitchen board…'},
+  dietitian:{tab:'ms', roles:['dietitian','manager'], view:'diet', title:'Dietitian Portal', ar:'بوابة أخصائي التغذية', sub:'For clinical dietitians · Microsoft 365', lead:'Send each patient\'s menu, review flagged trays and follow today\'s meal service. Sign in with your hospital Microsoft 365 account.'},
+  manager:  {tab:'ms', roles:['manager'], view:'patient', title:'Hospitality Manager', ar:'مدير الضيافة', sub:'All screens and staff accounts · Microsoft 365', lead:'Every screen of the meal service, plus kitchen and tray runner accounts. Sign in with your hospital Microsoft 365 account.'},
+  kitchen:  {tab:'local', roles:['kitchen','supervisor'], view:'kitchen', title:'Kitchen Display', ar:'شاشة المطبخ', sub:'Kitchen team · username & password', lead:'Incoming tray orders, auto-print and the Staff Café counter. Sign in with the username and password from the Hospitality Manager.'},
+  delivery: {tab:'local', roles:['runner','supervisor'], view:'delivery', title:'Tray Runner', ar:'تطبيق التوصيل', sub:'Tray runners · username & password', lead:'Trays ready for pickup and your deliveries. Sign in with the username and password from the Hospitality Manager.'},
+};
+let MCFG = MODES[MODE] || null;
+function applyModeLabels(){
+  document.body.classList.add('mode-'+MODE);
+  document.title = 'Kuwait Hospital · ' + MCFG.title;
+  const bs = document.querySelectorAll('.brand > div > span'); if(bs[0]) bs[0].textContent = MCFG.title+' · '; if(bs[1]) bs[1].textContent = MCFG.ar;
+  const sp = document.querySelector('#splash p'); if(sp && MCFG.splash) sp.textContent = MCFG.splash;
+}
+if(MCFG) applyModeLabels();
+function startPatient(){ // patients order without signing in: floor → room → menu
+  MODE = 'patient'; MCFG = MODES.patient; applyModeLabels(); LOC_ASKED = false;
+  SESSION = {name:MCFG.title, role:'patient', src:'none', views:['patient']};
+  $('login').classList.add('hidden'); applySession();
 }
 authInit();
 </script>

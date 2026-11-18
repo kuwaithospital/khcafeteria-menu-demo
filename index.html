@@ -19,7 +19,9 @@ header h1 em{color:var(--gold-2)}
 header .ar{font-size:22px;color:var(--gold-2)}
 header p{max-width:620px;margin:14px auto 0;opacity:.82;line-height:1.6}
 main{max-width:1100px;margin:-40px auto 0;padding:0 20px 60px}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.badge{align-self:flex-start;font-size:12px;font-weight:600;padding:4px 10px;border-radius:99px;margin-top:10px}.badge.open{background:#E7F7F1;color:#12A37F}.badge.ms{background:#EEF0FA;color:#212A5F}.badge.local{background:#FBF5EA;color:#9C6A12}
+.card h2{font-size:26px!important}.go code{font-size:12px}
 .card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;text-decoration:none;color:inherit;box-shadow:0 10px 30px rgba(33,42,95,.1);transition:.25s}
 .card:hover{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 18px 40px rgba(33,42,95,.16)}
 .card .ic{font-size:30px}
@@ -35,7 +37,7 @@ tr:last-child td{border-bottom:0}
 code{background:var(--sand);padding:2px 7px;border-radius:6px;color:var(--navy)}
 .note{margin-top:28px;background:var(--sand);border-radius:16px;padding:16px 18px;font-size:13.5px;color:var(--muted);line-height:1.6}
 footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
-@media(max-width:860px){.cards{grid-template-columns:1fr}.tw{overflow-x:auto}}
+@media(max-width:1000px){.cards{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.cards{grid-template-columns:1fr}.tw{overflow-x:auto}}
 </style>
 </head>
 <body>
@@ -46,15 +48,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
   <p>Interactive prototype for testing and management review. Patients, orders and accounts are fictitious, and nothing is connected to hospital systems.</p>
 </header>
 <main>
-  <div class="cards">
-    <a class="card" href="kh-meal-ordering.html"><div class="ic">🏥</div><h2>Full system</h2><div class="ar">النظام الكامل</div>
-      <p>Patient bedside menu (breakfast, lunch and dinner), kitchen display with auto-print, dietitian portal, tray runner app, TV dashboard and the Hospitality Manager's accounts page.</p><span class="go">Open →</span></a>
-    <a class="card" href="kh-staff-cafe.html"><div class="ic">☕</div><h2>Staff Café</h2><div class="ar">كافتيريا الموظفين</div>
-      <p>Staff ordering page: takeaway or dine in, now or scheduled, pay at pickup. Works well on a phone.</p><span class="go">Open →</span></a>
-    <a class="card" href="kh-bedside-tv.html"><div class="ic">📺</div><h2>Bedside TV</h2><div class="ar">تلفاز غرفة المريض</div>
-      <p>Patient menu for the room TV. Use the arrow keys and Enter like a TV remote; Backspace goes back.</p><span class="go">Open →</span></a>
-  </div>
-
+  <div class="cards"><a class="card" href="patient.html"><div class="ic">🛏️</div><span class="badge open">No sign-in</span><h2>Patient food order</h2><div class="ar">طلب وجبة المريض</div><p>Choose floor and room, then order from the menu. For bedside tablets and patients.</p><span class="go">Open · <code>patient.html</code></span></a><a class="card" href="staff-cafe.html"><div class="ic">☕</div><span class="badge ms">Microsoft 365</span><h2>Staff Café</h2><div class="ar">كافتيريا الموظفين</div><p>Hospital staff order takeaway or dine in, pay at pickup.</p><span class="go">Open · <code>staff-cafe.html</code></span></a><a class="card" href="dietitian.html"><div class="ic">📋</div><span class="badge ms">Microsoft 365</span><h2>Dietitian</h2><div class="ar">أخصائي التغذية</div><p>Send patient menus and review flagged trays.</p><span class="go">Open · <code>dietitian.html</code></span></a><a class="card" href="manager.html"><div class="ic">👔</div><span class="badge ms">Microsoft 365</span><h2>Hospitality Manager</h2><div class="ar">مدير الضيافة</div><p>All screens, reports and kitchen staff accounts.</p><span class="go">Open · <code>manager.html</code></span></a><a class="card" href="kitchen.html"><div class="ic">👩‍🍳</div><span class="badge local">Username</span><h2>Kitchen Display</h2><div class="ar">شاشة المطبخ</div><p>Incoming orders, auto-print and the café counter.</p><span class="go">Open · <code>kitchen.html</code></span></a><a class="card" href="delivery.html"><div class="ic">🚶</div><span class="badge local">Username</span><h2>Tray Runner</h2><div class="ar">تطبيق التوصيل</div><p>Trays to pick up and deliveries, on the runner's phone.</p><span class="go">Open · <code>delivery.html</code></span></a><a class="card" href="tv.html"><div class="ic">📺</div><span class="badge open">No sign-in</span><h2>Kitchen TV</h2><div class="ar">شاشة التلفاز</div><p>The live Kitchen Board for the TV in the kitchen.</p><span class="go">Open · <code>tv.html</code></span></a><a class="card" href="kh-bedside-tv.html"><div class="ic">🖥️</div><span class="badge open">No sign-in</span><h2>Bedside TV menu</h2><div class="ar">تلفاز غرفة المريض</div><p>Patient menu on the room TV, used with the remote.</p><span class="go">Open · <code>kh-bedside-tv.html</code></span></a></div>
   <h3>Test accounts</h3>
   <div class="tw"><table>
     <tr><th>Who</th><th>Sign-in tab</th><th>Username</th><th>Password</th><th>Sees</th></tr>

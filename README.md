@@ -2,14 +2,22 @@
 
 Interactive prototype for testing and management review. Patients, orders and accounts are fictitious, and nothing is connected to hospital systems.
 
-## Pages
+## Links for each user
 
-| Page | File |
-|---|---|
-| Start page with links and test accounts | `index.html` |
-| Full system: patient, kitchen, dietitian, delivery, TV, accounts | `kh-meal-ordering.html` |
-| Staff Café ordering | `kh-staff-cafe.html` |
-| Bedside TV menu | `kh-bedside-tv.html` |
+Replace `<site>` with your GitHub Pages address, e.g. `https://<your-username>.github.io/kh-meal-ordering-demo`.
+
+| Who | Link | Sign-in |
+|---|---|---|
+| Patient food order | `<site>/patient.html` | None: choose floor → room → menu |
+| Patient room tablet / QR code | `<site>/patient.html#room=808` | None: room already set |
+| Staff Café | `<site>/staff-cafe.html` | Microsoft 365 |
+| Dietitian | `<site>/dietitian.html` | Microsoft 365 |
+| Hospitality Manager | `<site>/manager.html` | Microsoft 365 |
+| Kitchen display | `<site>/kitchen.html` | Username and password |
+| Tray runner | `<site>/delivery.html` | Username and password |
+| Kitchen TV | `<site>/tv.html` | None (display only) |
+| Bedside TV menu | `<site>/kh-bedside-tv.html` | None |
+| Start page with all links | `<site>/` | None |
 
 ## Test accounts
 
