@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kuwait Hospital · Meal Ordering Demo</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/kh-logo-navy.png">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&family=Tajawal:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#212A5F;--gold:#B08D57;--gold-2:#D9BE8A;--ivory:#FFFDF9;--sand:#F6F0E4;--line:#EDE5D6;--muted:#5B6082;--serif:'Cormorant Garamond',Georgia,serif}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Fira Sans',system-ui,sans-serif;background:var(--ivory);color:#12163A}
+.ar{font-family:'Tajawal',sans-serif;direction:rtl}
+header{background:radial-gradient(120% 100% at 10% 0%,#2E3A80,#212A5F 55%,#161C44);color:#fff;padding:48px 24px 70px;text-align:center}
+header img{height:120px;width:auto}
+header h1{font-family:var(--serif);font-weight:600;font-size:clamp(38px,5vw,60px);margin:22px 0 4px}
+header h1 em{color:var(--gold-2)}
+header .ar{font-size:22px;color:var(--gold-2)}
+header p{max-width:620px;margin:14px auto 0;opacity:.82;line-height:1.6}
+main{max-width:1100px;margin:-40px auto 0;padding:0 20px 60px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;text-decoration:none;color:inherit;box-shadow:0 10px 30px rgba(33,42,95,.1);transition:.25s}
+.card:hover{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 18px 40px rgba(33,42,95,.16)}
+.card .ic{font-size:30px}
+.card h2{font-family:var(--serif);font-size:30px;color:var(--navy);margin:10px 0 2px;font-weight:600}
+.card .ar{color:var(--gold);font-size:15px;text-align:left}
+.card p{color:var(--muted);font-size:14px;line-height:1.55;flex:1}
+.card span.go{font-weight:600;color:var(--navy);font-size:14px}
+h3{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin:44px 0 12px}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;font-size:14px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+th{background:var(--sand);color:var(--navy);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+tr:last-child td{border-bottom:0}
+code{background:var(--sand);padding:2px 7px;border-radius:6px;color:var(--navy)}
+.note{margin-top:28px;background:var(--sand);border-radius:16px;padding:16px 18px;font-size:13.5px;color:var(--muted);line-height:1.6}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
+@media(max-width:860px){.cards{grid-template-columns:1fr}.tw{overflow-x:auto}}
+</style>
+</head>
+<body>
+<header>
+  <img src="assets/kh-logo-white.png" alt="Kuwait Hospital · مستشفى الكويت">
+  <h1>Patient Meal Ordering <em>· Demo</em></h1>
+  <div class="ar">نظام طلب الوجبات · نسخة تجريبية</div>
+  <p>Interactive prototype for testing and management review. Patients, orders and accounts are fictitious, and nothing is connected to hospital systems.</p>
+</header>
+<main>
+  <div class="cards">
+    <a class="card" href="kh-meal-ordering.html"><div class="ic">🏥</div><h2>Full system</h2><div class="ar">النظام الكامل</div>
+      <p>Patient bedside menu, kitchen display with auto-print, dietitian portal, tray runner app, TV dashboard and the Hospitality Manager's accounts page.</p><span class="go">Open →</span></a>
+    <a class="card" href="kh-staff-cafe.html"><div class="ic">☕</div><h2>Staff Café</h2><div class="ar">كافتيريا الموظفين</div>
+      <p>Staff ordering page: takeaway or dine in, now or scheduled, paid by payroll deduction. Works well on a phone.</p><span class="go">Open →</span></a>
+    <a class="card" href="kh-bedside-tv.html"><div class="ic">📺</div><h2>Bedside TV</h2><div class="ar">تلفاز غرفة المريض</div>
+      <p>Patient menu for the room TV. Use the arrow keys and Enter like a TV remote; Backspace goes back.</p><span class="go">Open →</span></a>
+  </div>
+
+  <h3>Test accounts</h3>
+  <div class="tw"><table>
+    <tr><th>Who</th><th>Sign-in tab</th><th>Username</th><th>Password</th><th>Sees</th></tr>
+    <tr><td>Hospitality Manager</td><td>Hospital staff</td><td colspan="2">Pick “Hospitality Manager”</td><td>All screens + Accounts</td></tr>
+    <tr><td>Dietitian</td><td>Hospital staff</td><td colspan="2">Pick “Clinical Dietitian”</td><td>Dietitian portal, TV</td></tr>
+    <tr><td>Hospital employee</td><td>Hospital staff</td><td colspan="2">Pick “Demo Employee” or “Staff Nurse”</td><td>Staff Café</td></tr>
+    <tr><td>Kitchen supervisor</td><td>Kitchen &amp; delivery</td><td><code>kitchen.sup</code></td><td><code>Kitchen@2026</code></td><td>Kitchen, café counter, delivery, TV</td></tr>
+    <tr><td>Kitchen staff</td><td>Kitchen &amp; delivery</td><td><code>kitchen01</code></td><td><code>Kitchen@2026</code></td><td>Kitchen, café counter, TV</td></tr>
+    <tr><td>Tray runner</td><td>Kitchen &amp; delivery</td><td><code>runner.ahmed</code></td><td><code>Kitchen@2026</code></td><td>Delivery app</td></tr>
+  </table></div>
+
+  <div class="note"><b>Testing notes.</b> Microsoft 365 sign-in is simulated with demo accounts. Each tester's orders and accounts are saved only in their own browser, so two testers won't see each other's orders. Dish photos need internet. Best in Chrome or Edge.</div>
+</main>
+<footer>Kuwait Hospital · Meal Ordering prototype · For internal testing only</footer>
+</body>
+</html>
