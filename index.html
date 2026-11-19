@@ -254,6 +254,19 @@
 @keyframes lpShake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
 .pt-id{display:inline-flex;gap:6px;align-items:center}
 @media (max-width:560px){.lp-pt{grid-template-columns:1fr}}
+.lg-lead-ar{display:block;margin-top:10px;font-size:.95em;opacity:.85;text-align:left;line-height:1.7}
+#login .lg-art h1#lgTitle{font-size:clamp(36px,3.4vw,58px);max-width:58%}
+@media (max-width:900px){#login .lg-art h1#lgTitle{max-width:none;font-size:34px}}
+
+/* sign-in tabs: 3D push buttons */
+.lg-tabs{gap:12px;background:none!important;padding:0 0 6px!important}
+.lg-tabs button{position:relative;border-radius:16px!important;padding:13px 10px!important;background:linear-gradient(180deg,#FFFFFF,#EAF3FA)!important;color:#5B7FA3!important;
+  border:1px solid #CFE0EE!important;box-shadow:0 6px 0 #B9D2E6,0 10px 18px rgba(33,42,95,.12)!important;transform:translateY(0);transition:transform .12s,box-shadow .12s,background .2s,color .2s}
+.lg-tabs button:hover{transform:translateY(-1px);box-shadow:0 7px 0 #B9D2E6,0 12px 20px rgba(33,42,95,.14)!important}
+.lg-tabs button:active{transform:translateY(5px);box-shadow:0 1px 0 #B9D2E6,0 3px 6px rgba(33,42,95,.12)!important}
+.lg-tabs button.on{background:linear-gradient(180deg,#3A93D4,#2B7BBF)!important;color:#fff!important;border-color:#2B7BBF!important;
+  transform:translateY(4px);box-shadow:0 2px 0 #1F5F98,inset 0 2px 6px rgba(0,0,0,.18)!important}
+.lg-tabs button.on small{color:#DCEEFB!important;opacity:1}
 </style>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1484,9 +1497,9 @@ body:not(.one-view) .uchip .nm,body:not(.one-view) .uchip button span{display:no
         <rect x="18" y="132" width="164" height="10" rx="5" class="plate"/>
       </svg>
     </div>
-    <h1 id="lgTitle">Meal ordering,<br><em>served with care.</em></h1>
-    <div class="ar2" id="lgTitleAr">نظام طلب الوجبات</div>
-    <p id="lgLead">One secure sign-in for every team. Hospital staff use their hospital Microsoft 365 account. Outsourced kitchen and tray runner staff use a username and password issued by the Hospitality Manager.</p>
+    <h1 id="lgTitle">Wellness on every plate,<br><em>served with care.</em></h1>
+    <div class="ar2" id="lgTitleAr">العافية في كل طبق، تُقدَّم بعناية</div>
+    <p id="lgLead">Fresh, balanced meals prepared daily by our chefs and checked by our clinical dietitians to support every patient's recovery. From our kitchen to your bedside, we serve every tray with care.<span class="ar lg-lead-ar">وجبات طازجة ومتوازنة يعدّها طهاتنا يومياً ويراجعها أخصائيو التغذية لدعم تعافيكم — نقدّمها لكم بكل عناية.</span></p>
     <div class="lg-who" id="lgWho">
       <div><b>Microsoft 365</b><small>Hospitality Manager, Dietitians and all hospital staff (Staff Café)</small></div>
       <div><b>Username &amp; password</b><small>Outsourced kitchen staff, kitchen supervisor and tray runners</small></div>
